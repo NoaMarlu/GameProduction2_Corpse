@@ -21,7 +21,7 @@ public class GridManager : MonoBehaviour
     public class Cell
     {
         public int x, y;
-        public bool isWalk = true;
+        public bool isWalk = true;//•à‚¯‚éƒ}ƒX‚©‚Ì”»’è
         public GridType type = GridType.None;
         public Cell(int x, int y)
         {
