@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 public class GridManager : MonoBehaviour
 {
 
+    public static GridManager Instance { get; private set; }
+
     //グリッドの基本サイズ
     public int width = 10;
     public int height = 10;
@@ -35,27 +37,33 @@ public class GridManager : MonoBehaviour
     public Tilemap gridTilemap;
     public TileBase gridTileBase;
 
-    void Start()
+    void Awake()
     {
-        //グリッドの作成
-        grid = new Cell[width,height];
-        for(int x = 0; x < width; x++)
+        //シングルトン化
+        if (Instance != null && Instance != this)
         {
-            for(int y = 0; y < height; y++)
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        //グリッドの作成
+        grid = new Cell[width, height];
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
             {
                 grid[x, y] = new Cell(x, y);
             }
         }
         DrawGrid();
-    }
-
+}
     //グリッド番号から座標を取得
-    public Vector3 GridToWorld(int x, int y)  {return new Vector3(x * cellSize, y * cellSize, 0); }
+    public Vector3 GridToWorld(int x, int y)  {return new Vector3(x * cellSize+ cellSize * 0.5f, y * cellSize+ cellSize * 0.5f, 0); }
     //座標からグリッド番号を取得
     public Vector2Int WorldToGrid(Vector3 worldPos)
     {
-        int x = Mathf.RoundToInt(worldPos.x / cellSize);
-        int y = Mathf.RoundToInt(worldPos.y / cellSize);
+        int x = Mathf.FloorToInt(worldPos.x / cellSize);
+        int y = Mathf.FloorToInt(worldPos.y / cellSize);
         return new Vector2Int(x, y);
     }
     //座標からセルを取得
@@ -75,6 +83,23 @@ public class GridManager : MonoBehaviour
                 Vector3Int pos = new Vector3Int(x, y, 0);
                 gridTilemap.SetTile(pos, gridTileBase);
             }
+        }
+    }
+    //実行前用の描画
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        for(int x = 0; x <= width; x++)
+        {
+            Vector3 start = new Vector3(x * cellSize, 0, 0);
+            Vector3 end = new Vector3(x * cellSize, height * cellSize,0);
+            Gizmos.DrawLine(start, end);
+        }
+        for(int y = 0; y <= height; y++)
+        {
+            Vector3 start = new Vector3(0, y * cellSize, 0);
+            Vector3 end = new Vector3(width * cellSize, y * cellSize, 0);
+            Gizmos.DrawLine(start, end);
         }
     }
 

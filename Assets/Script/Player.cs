@@ -1,11 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static GridManager;
 
 public class Player : MonoBehaviour
 {
 
     //グリッド情報
-    GridManager gridManager;
     public int gridX;
     public int gridY;
 
@@ -14,21 +14,26 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        TurnManager.Instance.SetPlayer(this);
+        TurnManager.Instance.SetPlayer(gameObject.GetComponent<Player>());
+        SetPos();
         SnapToGrid();
+    }
+    void Update()
+    {
+        PlayerInput();
     }
 
     //座標の設定
-    void SnapToGrid() { transform.position = gridManager.GridToWorld(gridX, gridY); }
+    void SnapToGrid() { transform.position = GridManager.Instance.GridToWorld(gridX, gridY); }
     //移動入力処理
-    public void PlayerInput(Vector2Int direction)
+    public void PlayerInput()
     {
         Vector2Int dir = Vector2Int.zero;
         //入力
-        if (Input.GetKeyDown(KeyCode.W)) { dir = Vector2Int.up; }
-        if (Input.GetKeyDown(KeyCode.A)) { dir = Vector2Int.left; }
-        if (Input.GetKeyDown(KeyCode.S)) { dir = Vector2Int.down; }
-        if (Input.GetKeyDown(KeyCode.D)) { dir = Vector2Int.right; }
+        if (Keyboard.current.wKey.wasPressedThisFrame) { dir = Vector2Int.up; }
+        if (Keyboard.current.aKey.wasPressedThisFrame) { dir = Vector2Int.left; }
+        if (Keyboard.current.sKey.wasPressedThisFrame) { dir = Vector2Int.down; }
+        if (Keyboard.current.dKey.wasPressedThisFrame) { dir = Vector2Int.right; }
 
         //directionが変わったら通知
         if(dir != Vector2Int.zero)
@@ -42,7 +47,7 @@ public class Player : MonoBehaviour
         //セル情報の取得
         int targetX = gridX + direction.x;
         int targetY = gridY + direction.y;
-        Cell targetCell = gridManager.GetCell(targetX, targetY);
+        Cell targetCell = GridManager.Instance.GetCell(targetX, targetY);
 
         if (targetCell == null || !targetCell.isWalk) return false;
         return true;
@@ -56,7 +61,7 @@ public class Player : MonoBehaviour
         int targetY = gridY + lastDirection.y;
 
         //再度判定を取る（ダメージ判定のない壁になる敵が出てきた時用）
-        var targetCell = gridManager.GetCell(targetX, targetY);
+        var targetCell = GridManager.Instance.GetCell(targetX, targetY);
         if (targetCell == null || !targetCell.isWalk)
         {
             MoveCancel(targetCell);
@@ -69,11 +74,18 @@ public class Player : MonoBehaviour
         SnapToGrid();
 
     }
-
+    //エネミー実行後に移動をキャンセルする場合
     private void MoveCancel(GridManager.Cell cancelCell)
     {
         //ダメージ処理などの分岐は後で書く
         Debug.Log("移動がキャンセルされました");
+    }
+    //位置を綺麗に修正
+    void SetPos()
+    {
+        Vector2Int pos = GridManager.Instance.WorldToGrid(transform.position);
+        gridX = pos.x;
+        gridY = pos.y;
     }
 
 }
