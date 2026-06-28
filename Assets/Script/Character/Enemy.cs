@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     public enum CorpseMode 
     {
         None,  //遺体効果なし
+        Weight,//重し効果
     }
     public CorpseMode courpseMode;
 
@@ -124,6 +125,8 @@ public class Enemy : MonoBehaviour
     //遺体処理
     void ChangeCorpse() 
     {
+        //Prototype用
+        GetComponent<SpriteRenderer>().color = Color.black;
         //壁判定
         var Cell = GridManager.Instance.GetCell(gridX, gridY);
         if(Cell != null)Cell.isWalk = false;
@@ -137,9 +140,13 @@ public class Enemy : MonoBehaviour
     //遺体効果
     void CorpseEffect()
     {
+        var cell = GridManager.Instance.GetCell(gridX, gridY);
         switch (courpseMode) 
         {
             case CorpseMode.None:   break;
+            case CorpseMode.Weight:
+                if (cell != null) cell.type |= GridManager.GridType.Weight;
+                break;
         }
     }
     //ステージのアクティブ管理

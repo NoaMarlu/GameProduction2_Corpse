@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerInput();
+        ArrowInput();
     }
 
     //座標の設定
@@ -101,6 +102,31 @@ public class Player : MonoBehaviour
         gridY = initGridY;
         lastDirection = Vector2Int.zero;
         SnapToGrid();
+    }
+    //矢の発射
+    public void ArrowInput()
+    {
+        Vector2Int dir = Vector2Int.zero;
+
+        if(Gamepad.current != null)
+        {
+            //コントローラー
+            if (Gamepad.current.buttonNorth.wasPressedThisFrame) dir = Vector2Int.up;
+            if (Gamepad.current.buttonSouth.wasPressedThisFrame) dir = Vector2Int.down;
+            if (Gamepad.current.buttonWest.wasPressedThisFrame) dir = Vector2Int.left;
+            if (Gamepad.current.buttonEast.wasPressedThisFrame) dir = Vector2Int.right;
+        }
+        else
+        {
+            //キーボード
+            if (Keyboard.current.upArrowKey.wasPressedThisFrame) dir = Vector2Int.up;
+            if (Keyboard.current.downArrowKey.wasPressedThisFrame) dir = Vector2Int.down;
+            if (Keyboard.current.leftArrowKey.wasPressedThisFrame) dir = Vector2Int.left;
+            if (Keyboard.current.rightArrowKey.wasPressedThisFrame) dir = Vector2Int.right;
+        }
+
+        if (dir != Vector2Int.zero) TurnManager.Instance.FireArrow(dir);
+
     }
 
 }

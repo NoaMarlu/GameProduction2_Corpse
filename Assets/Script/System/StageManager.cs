@@ -39,6 +39,8 @@ public class StageManager : MonoBehaviour
     {
         if (currentStage == null) return;
         currentStage.ResetStage();
+        //リセット後にスイッチの状況が変化したかチェック
+        TurnManager.Instance.CheckSwitchDoor();
     }
     //currentStageの更新
     public void isPlayerStage(Stage newStage,Player player)
