@@ -23,6 +23,7 @@ public class StageManager : MonoBehaviour
     //プレイヤー入力処理
     void PlayerInput()
     {
+        if (TurnManager.Instance.turnState != TurnManager.TurnState.Wait) return;
         //リセット入力
         if(Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame)
         {
@@ -34,7 +35,7 @@ public class StageManager : MonoBehaviour
         }
     }
     //現在のステージをリセット
-    void CurrentStageReset()
+    public void CurrentStageReset()
     {
         if (currentStage == null) return;
         currentStage.ResetStage();

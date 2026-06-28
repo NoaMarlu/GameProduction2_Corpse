@@ -32,7 +32,7 @@ public class Stage : MonoBehaviour
         isActive = false;
         foreach (var enemy in stageEnemies)
         {
-            enemy.EnemyReset();
+            enemy.SetActive(false);
         }
     }
     //リセット呼び出し

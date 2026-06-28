@@ -19,10 +19,10 @@ public class Player : MonoBehaviour
     void Start()
     {
         TurnManager.Instance.SetPlayer(gameObject.GetComponent<Player>());
+        SetPos();
         //リセット用
         initGridX = gridX;
         initGridY = gridY;
-        SetPos();
         SnapToGrid();
     }
     void Update()

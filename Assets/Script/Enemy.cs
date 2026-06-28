@@ -40,12 +40,23 @@ public class Enemy : MonoBehaviour
             case MoveMode.RightToLeft: lastDirection =new Vector2Int(1,0); break;
             case MoveMode.UpToDown: UpToDownFunc(); break;
         }
-        //位置記録
+    }
+    void Start()
+    {
+        SetPos();
+        //リセット用
         initGridX = gridX;
         initGridY = gridY;
         initDirection = lastDirection;
     }
 
+    //位置設定
+    void SetPos()
+    {
+        Vector2Int pos = GridManager.Instance.WorldToGrid(transform.position);
+        gridX = pos.x;
+        gridY = pos.y;
+    }
     //位置変更
     void SnapToGrid(){  transform.position  =GridManager.Instance.GridToWorld(gridX, gridY); }
     //移動処理
@@ -118,8 +129,9 @@ public class Enemy : MonoBehaviour
         if(Cell != null)Cell.isWalk = false;
         //効果設定
         CorpseEffect();
+        //遺体フラグ
+        isCorpse = true;
         //移動停止
-        enabled = false;
         TurnManager.Instance.RemoveEnemy(this);
     }
     //遺体効果

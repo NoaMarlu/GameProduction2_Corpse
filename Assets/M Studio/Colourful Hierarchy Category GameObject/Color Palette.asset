@@ -13,20 +13,15 @@ MonoBehaviour:
   m_Name: Color Palette
   m_EditorClassIdentifier: 
   colorDesigns:
-  - keyChar: //
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    backgroundColor: {r: 0, g: 0.10323961, b: 0.10323961, a: 1}
+  - keyChar: '#'
+    textColor: {r: 1, g: 0.88947076, b: 0.3226415, a: 1}
+    backgroundColor: {r: 0.067176916, g: 0.29438522, b: 0.6981132, a: 1}
     textAlignment: 4
-    fontStyle: 3
+    fontStyle: 1
   - keyChar: ///
     textColor: {r: 1, g: 1, b: 1, a: 1}
     backgroundColor: {r: 0, g: 0.6152477, b: 1, a: 1}
     textAlignment: 5
-    fontStyle: 1
-  - keyChar: '#'
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    backgroundColor: {r: 0.5058824, g: 0.84705883, b: 0.81960785, a: 1}
-    textAlignment: 3
     fontStyle: 1
   - keyChar: '@'
     textColor: {r: 1, g: 1, b: 1, a: 1}

@@ -32,14 +32,21 @@ public class TurnManager : MonoBehaviour
     //プレイヤーの登録
     public void SetPlayer(Player p) { player = p; }
     //敵の登録
-    public void AddEnemy(Enemy enemy) { enemies.Add(enemy); }
+    public void AddEnemy(Enemy enemy) 
+    {
+        if (enemies.Contains(enemy)) return;
+        enemies.Add(enemy);
+    }
     //敵の登録解除
-    public void RemoveEnemy(Enemy enemy) { enemies.Remove(enemy); }
+    public void RemoveEnemy(Enemy enemy) 
+    {
+        if (enemies.Contains(enemy)) return;
+        enemies.Remove(enemy); 
+    }
     //プレイヤーの移動入力通知
     public void isPlayerInput(Vector2Int direction)
     {
         if ( turnState != TurnState.Wait) return;
-
         if (!player.CanMove(direction)) return;
 
         turnState = TurnState.Action;
@@ -51,7 +58,22 @@ public class TurnManager : MonoBehaviour
         foreach(var enemy in enemies) { enemy.EnemyMove(); }
         player.PlayerMove();
 
+        CheckPlayerEnemyCollision();
+
         turnState = TurnState.Wait;
+    }
+    //敵とプレイヤーが同じマスにいるかどうか
+    void CheckPlayerEnemyCollision()
+    {
+        foreach(var enemy in enemies)
+        {
+            //位置が同じならリセット
+            if(enemy.gridX == player.gridX && enemy.gridY == player.gridY)
+            {
+                StageManager.Instance.CurrentStageReset();
+                return;
+            }
+        }
     }
 
 }
