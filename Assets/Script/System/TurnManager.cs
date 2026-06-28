@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Video;
+using System.Linq;
 
 public class TurnManager : MonoBehaviour
 {
@@ -61,13 +62,21 @@ public class TurnManager : MonoBehaviour
 
         //移動方向を設定
         player.SetMoveDirection(direction);
-
-        //実行
-        foreach(var enemy in enemies) { enemy.EnemyMove(); }
+        //level順にソートして実行
+        foreach(var enemy in enemies.OrderByDescending(e => e.level))
+        {
+            enemy.EnemyMove();
+            //実行中に重なってもリセット
+            if(enemy.gridX == player.gridX && enemy.gridY == player.gridY)
+            {
+                StageManager.Instance.CurrentStageReset();
+                return;
+            }
+        }
         player.PlayerMove();
 
+        //移動後に全体の重なりを確認
         CheckPlayerEnemyCollision();
-
         //スイッチの状態チェック
         CheckSwitchDoor();
 

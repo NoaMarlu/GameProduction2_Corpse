@@ -3,11 +3,12 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    //グリッド情報
+    //基本情報
     public int gridX;
     public int gridY;
-
     public Vector2Int lastDirection;
+
+    public int level = 0;//レベルが高いと実行が早い
 
     //Inspector上で指定する移動モード
     public enum MoveMode 
