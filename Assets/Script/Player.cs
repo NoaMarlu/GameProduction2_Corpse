@@ -12,9 +12,16 @@ public class Player : MonoBehaviour
     //入力処理
     public Vector2Int lastDirection;//最後の入力方向
 
+    //リセット用
+    private int initGridX;
+    private int initGridY;
+
     void Start()
     {
         TurnManager.Instance.SetPlayer(gameObject.GetComponent<Player>());
+        //リセット用
+        initGridX = gridX;
+        initGridY = gridY;
         SetPos();
         SnapToGrid();
     }
@@ -86,6 +93,14 @@ public class Player : MonoBehaviour
         Vector2Int pos = GridManager.Instance.WorldToGrid(transform.position);
         gridX = pos.x;
         gridY = pos.y;
+    }
+    //リセット
+    public void PlayerReset()
+    {
+        gridX = initGridX;
+        gridY = initGridY;
+        lastDirection = Vector2Int.zero;
+        SnapToGrid();
     }
 
 }
