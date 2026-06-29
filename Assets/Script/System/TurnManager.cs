@@ -69,6 +69,7 @@ public class TurnManager : MonoBehaviour
             //実行中に重なってもリセット
             if(enemy.gridX == player.gridX && enemy.gridY == player.gridY)
             {
+                turnState = TurnState.Wait;
                 StageManager.Instance.CurrentStageReset();
                 return;
             }
