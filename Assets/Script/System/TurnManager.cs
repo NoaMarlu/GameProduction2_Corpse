@@ -76,9 +76,9 @@ public class TurnManager : MonoBehaviour
         }
         player.PlayerMove();
 
-        //移動後に全体の重なりを確認
+        //移動後にチェック
         CheckPlayerEnemyCollision();
-        //スイッチの状態チェック
+        CheckDecay();
         CheckSwitchDoor();
 
         turnState = TurnState.Wait;
@@ -126,6 +126,26 @@ public class TurnManager : MonoBehaviour
     {
         foreach (var sw in switches) { sw.CheckSwitch(); }
         foreach (var door in doors) { door.CheckDoor(); }
+    }
+
+    /*遺体効果関連*/
+    //腐敗マスチェック
+    void CheckDecay()
+    {
+        var cell = GridManager.Instance.GetCell(player.gridX, player.gridY);
+        //プレイヤーが腐敗マスにいるか
+        if(cell != null && (cell.type & GridManager.GridType.Decay) != 0)
+        {
+            StageManager.Instance.CurrentStageReset();
+            return;
+        }
+        //敵が腐敗マスにいるか
+        foreach (var enemy in enemies.ToList())
+        {
+            var enemyCell = GridManager.Instance.GetCell(enemy.gridX, enemy.gridY);
+            //矢の衝突処理を使いまわす
+            if (enemyCell != null && (enemyCell.type & GridManager.GridType.Decay) != 0) enemy.HitArrow();
+        }
     }
 
 }

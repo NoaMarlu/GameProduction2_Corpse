@@ -19,6 +19,7 @@ public class GridManager : MonoBehaviour
         None                      =0,
         PlayerDamaged       =1<<0,
         Weight               　   = 1<<1,///重し判定
+        Decay                    = 1<<2,   //腐敗マス
     }
 
     public class Cell

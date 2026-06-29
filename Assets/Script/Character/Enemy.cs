@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
@@ -20,18 +22,24 @@ public class Enemy : MonoBehaviour
     public MoveMode moveMode;
 
     //Inspector上で指定する遺体の効果
+    [System.Flags]
     public enum CorpseMode 
     {
-        None,  //遺体効果なし
-        Weight,//重し効果
+        None    =0,//遺体効果なし
+        Weight  =1<<0,//重し効果
+        Decay =1<<1,//周囲1マスを腐敗
     }
-    public CorpseMode courpseMode;
+    public CorpseMode corpseMode;
 
     //リセット用
     private int initGridX;//初期位置
     private int initGridY;
     private Vector2Int initDirection;//初期方向
     private bool isCorpse = false;
+
+    //腐敗用
+    public GameObject decayPrefab;//腐敗しているマス用のプレハブ
+    private List<GameObject> decayObjects = new List<GameObject>();
 
     void Awake()
     {
@@ -123,9 +131,12 @@ public class Enemy : MonoBehaviour
     {
         ChangeCorpse();
     }
+
+    /*遺体関連*/
     //遺体処理
     void ChangeCorpse() 
     {
+        if (isCorpse) return;
         //Prototype用
         GetComponent<SpriteRenderer>().color = Color.black;
         //壁判定
@@ -141,15 +152,67 @@ public class Enemy : MonoBehaviour
     //遺体効果
     void CorpseEffect()
     {
+        if ((corpseMode & CorpseMode.Weight) != 0) ApplyWeight();
+        if ((corpseMode & CorpseMode.Decay) != 0) ApplyDecay();
+    }
+    //セルに重しを適用
+    void ApplyWeight()
+    {
         var cell = GridManager.Instance.GetCell(gridX, gridY);
-        switch (courpseMode) 
+        if (cell != null) cell.type |= GridManager.GridType.Weight;
+    }
+    //セルに腐敗を適用
+    void ApplyDecay()
+    {
+        //周囲8マスの3*3範囲
+        for(int dx = -1;dx <= 1; dx++)
         {
-            case CorpseMode.None:   break;
-            case CorpseMode.Weight:
-                if (cell != null) cell.type |= GridManager.GridType.Weight;
-                break;
+            for(int dy = -1; dy <= 1; dy++)
+            {
+                //位置情報取得
+                int targetX = gridX + dx;
+                int targetY = gridY + dy;
+                var cell = GridManager.Instance.GetCell(targetX, targetY);
+                if (cell == null) continue;
+
+                cell.type |= GridManager.GridType.Decay;
+                if(decayPrefab != null)
+                {
+                    //オブジェクトの生成
+                    Vector3 worldPos = GridManager.Instance.GridToWorld(targetX, targetY);
+                    GameObject decayObj = Instantiate(decayPrefab, worldPos, Quaternion.identity);
+                    decayObjects.Add(decayObj);
+                }
+            }
         }
     }
+    void RemoveDecay()
+    {
+        //腐敗してなかったらreturn
+        if ((corpseMode & CorpseMode.Decay) == 0) return;
+
+        //腐敗フラグを消す
+        for(int dx = -1;dx <= 1; dx++)
+        {
+            for(int dy = -1;dy <= 1; dy++)
+            {
+                int targetX = initGridX + dx;
+                int targetY = initGridY + dy;
+                var cell = GridManager.Instance.GetCell(targetX, targetY);
+                if(cell != null)cell.type &= ~GridManager.GridType.Decay;
+            }
+        }
+
+        //生成した腐敗オブジェクトを削除する
+        foreach(var obj in decayObjects)
+        {
+            if (obj != null) Destroy(obj);
+        }
+        decayObjects.Clear();
+
+    }
+
+
     //ステージのアクティブ管理
     public void SetActive(bool active)
     {
@@ -165,6 +228,8 @@ public class Enemy : MonoBehaviour
         {
             var corpseCell = GridManager.Instance.GetCell(gridX, gridY);
             if (corpseCell != null) corpseCell.isWalk = true;
+            if (corpseCell != null) corpseCell.type &= ~GridManager.GridType.Weight;
+            RemoveDecay();
         }
         isCorpse = false;
         //位置
@@ -172,6 +237,9 @@ public class Enemy : MonoBehaviour
         gridY = initGridY;
         lastDirection = initDirection;
         SnapToGrid();
+
+        //Prototype用
+        GetComponent<SpriteRenderer>().color = Color.red;
         //ターンマネージャーに登録
         TurnManager.Instance.AddEnemy(this);
     }
