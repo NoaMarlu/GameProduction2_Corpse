@@ -1376,7 +1376,6 @@ MonoBehaviour:
   stretchDuration: 0.03
   squashDuration: 0.06
   returnDuration: 0.08
-  dustParticle: {fileID: 0}
 --- !u!1001 &1580340956
 PrefabInstance:
   m_ObjectHideFlags: 0
