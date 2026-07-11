@@ -1213,7 +1213,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: be40c729bdfe211438ea348dd733c790, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1376,6 +1376,7 @@ MonoBehaviour:
   stretchDuration: 0.03
   squashDuration: 0.06
   returnDuration: 0.08
+  dustParticle: {fileID: 0}
 --- !u!1001 &1580340956
 PrefabInstance:
   m_ObjectHideFlags: 0
