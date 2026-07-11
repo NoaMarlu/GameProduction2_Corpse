@@ -40,7 +40,6 @@ public class Switch : MonoBehaviour
 
         //遺体がスイッチに乗ってたら
         var cell = GridManager.Instance.GetCell(gridX, gridY);
-        Debug.Log("Switch" + gridX + "," + gridY + "のcell.type=" +cell.type);
         if (cell != null && (cell.type & GridManager.GridType.Weight) != 0) OnTop = true;
 
         isOn = OnTop;

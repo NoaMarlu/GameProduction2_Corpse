@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Video;
+using System.Linq;
 
 public class TurnManager : MonoBehaviour
 {
@@ -61,14 +62,23 @@ public class TurnManager : MonoBehaviour
 
         //移動方向を設定
         player.SetMoveDirection(direction);
-
-        //実行
-        foreach(var enemy in enemies) { enemy.EnemyMove(); }
+        //level順にソートして実行
+        foreach(var enemy in enemies.OrderByDescending(e => e.level))
+        {
+            enemy.EnemyMove();
+            //実行中に重なってもリセット
+            if(enemy.gridX == player.gridX && enemy.gridY == player.gridY)
+            {
+                turnState = TurnState.Wait;
+                StageManager.Instance.CurrentStageReset();
+                return;
+            }
+        }
         player.PlayerMove();
 
+        //移動後にチェック
         CheckPlayerEnemyCollision();
-
-        //スイッチの状態チェック
+        CheckDecay();
         CheckSwitchDoor();
 
         turnState = TurnState.Wait;
@@ -116,6 +126,26 @@ public class TurnManager : MonoBehaviour
     {
         foreach (var sw in switches) { sw.CheckSwitch(); }
         foreach (var door in doors) { door.CheckDoor(); }
+    }
+
+    /*遺体効果関連*/
+    //腐敗マスチェック
+    void CheckDecay()
+    {
+        var cell = GridManager.Instance.GetCell(player.gridX, player.gridY);
+        //プレイヤーが腐敗マスにいるか
+        if(cell != null && (cell.type & GridManager.GridType.Decay) != 0)
+        {
+            StageManager.Instance.CurrentStageReset();
+            return;
+        }
+        //敵が腐敗マスにいるか
+        foreach (var enemy in enemies.ToList())
+        {
+            var enemyCell = GridManager.Instance.GetCell(enemy.gridX, enemy.gridY);
+            //矢の衝突処理を使いまわす
+            if (enemyCell != null && (enemyCell.type & GridManager.GridType.Decay) != 0) enemy.HitArrow();
+        }
     }
 
 }

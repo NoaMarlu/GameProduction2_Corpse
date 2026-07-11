@@ -53,5 +53,12 @@ public class StageManager : MonoBehaviour
         currentStage.stagePlayer = player;
         currentStage.ActiveStage();
     }
+    //ステージから出たら
+    public void IsPlayerExitStage(Stage exitStage)
+    {
+        if (currentStage != exitStage) return;
+        currentStage.InactiveStage();
+        currentStage = null;
+    }
 
 }
