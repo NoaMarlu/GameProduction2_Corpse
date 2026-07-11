@@ -16,6 +16,13 @@ public class Player : MonoBehaviour
     private int initGridX;
     private int initGridY;
 
+    //スプライト
+    SpriteRenderer spr;
+
+    private void Awake()
+    {
+        spr = GetComponent<SpriteRenderer>();
+    }
     void Start()
     {
         TurnManager.Instance.SetPlayer(gameObject.GetComponent<Player>());
@@ -80,6 +87,9 @@ public class Player : MonoBehaviour
         gridX = targetX;
         gridY = targetY;
         SnapToGrid();
+
+        //方向にあわせてスプライトを変更
+        if (lastDirection.x != 0)spr.flipX = lastDirection.x > 0;
 
     }
     //エネミー実行後に移動をキャンセルする場合
