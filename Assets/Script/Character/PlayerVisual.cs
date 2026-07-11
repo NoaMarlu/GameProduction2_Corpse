@@ -12,8 +12,11 @@ public class PlayerVisual : MonoBehaviour
     public float stretchDuration = 0.08f;//移動中の時間
     public float squashDuration = 0.06f;//着地中の時間
     public float returnDuration = 0.1f;//元の大きさに戻る時間
-
+    //シークエンス
     private Sequence currentSequence;
+
+    //エフェクト
+    public ParticleSystem dustParticle;//砂埃のエフェクト
     
     //移動開始時
     public void PlayMoveStretch(Vector2Int direction)
@@ -44,6 +47,15 @@ public class PlayerVisual : MonoBehaviour
             .Append(transform.DOScale(squashScale, squashDuration).SetEase(Ease.InQuad))
             .Append(transform.DOScale(Vector3.one, returnDuration).SetEase(Ease.OutElastic));
 
+        //砂埃エフェクト
+        currentSequence.InsertCallback(stretchDuration, PlayDust);
+    }
+
+    void PlayDust()
+    {
+        if (dustParticle == null) return;
+        dustParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        dustParticle.Play();
     }
 
 }
