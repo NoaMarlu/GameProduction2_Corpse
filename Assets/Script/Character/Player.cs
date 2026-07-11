@@ -18,10 +18,12 @@ public class Player : MonoBehaviour
 
     //スプライト
     SpriteRenderer spr;
+    private PlayerVisual visual;
 
     private void Awake()
     {
         spr = GetComponent<SpriteRenderer>();
+        visual = GetComponent<PlayerVisual>();
     }
     void Start()
     {
@@ -90,6 +92,9 @@ public class Player : MonoBehaviour
 
         //方向にあわせてスプライトを変更
         if (lastDirection.x != 0)spr.flipX = lastDirection.x > 0;
+
+        //移動アニメーション
+        visual?.PlayMoveStretch(lastDirection);
 
     }
     //エネミー実行後に移動をキャンセルする場合
