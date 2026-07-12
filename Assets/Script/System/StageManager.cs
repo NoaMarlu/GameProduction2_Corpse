@@ -57,6 +57,7 @@ public class StageManager : MonoBehaviour
     public void IsPlayerExitStage(Stage exitStage)
     {
         if (currentStage != exitStage) return;
+        if (!currentStage.isCleared) currentStage.ExitStageAndNoClear();
         currentStage.InactiveStage();
         currentStage = null;
     }

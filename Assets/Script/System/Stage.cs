@@ -76,6 +76,16 @@ public class Stage : MonoBehaviour
             stagePlayer.PlayerReset();
         }
     }
+    //未クリア時にステージを出た際の処理
+    public void ExitStageAndNoClear()
+    {
+        if (isCleared) return;//クリア済みならリセットしない
+
+        foreach (var enemy in stageEnemies)
+        {
+            enemy.EnemyReset();
+        }
+    }
 
     //クリアしているかチェック
     public void CheckClear()
