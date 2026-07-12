@@ -139,7 +139,6 @@ public class Player : MonoBehaviour
             if (Keyboard.current.leftArrowKey.wasPressedThisFrame) dir = Vector2Int.left;
             if (Keyboard.current.rightArrowKey.wasPressedThisFrame) dir = Vector2Int.right;
         }
-
         if (dir != Vector2Int.zero) TurnManager.Instance.FireArrow(dir);
 
     }

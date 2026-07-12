@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Stage : MonoBehaviour
@@ -93,7 +94,12 @@ public class Stage : MonoBehaviour
         if (isCleared) return;
         if (stagePlayer == null) return;
 
-        if(stagePlayer.gridX == clearGridPos.x && stagePlayer.gridY == clearGridPos.y)
+        //モンスターが全て遺体かチェック
+        bool allEnemiesDefeated = stageEnemies.All(e => e.IsCorpse());
+        //指定グリッドを踏んでいる状態でモンスターを討伐していればクリア
+        bool onClearGrid = stagePlayer.gridX == clearGridPos.x && stagePlayer.gridY == clearGridPos.y;
+
+        if(allEnemiesDefeated && onClearGrid)
         {
             isCleared = true;
             OnClear();

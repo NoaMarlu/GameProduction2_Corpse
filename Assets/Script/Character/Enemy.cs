@@ -243,4 +243,7 @@ public class Enemy : MonoBehaviour
         //ターンマネージャーに登録
         TurnManager.Instance.AddEnemy(this);
     }
+    //遺体判定を返す
+    public bool IsCorpse() { return isCorpse;  }
+
 }
