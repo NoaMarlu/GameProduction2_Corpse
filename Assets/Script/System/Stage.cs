@@ -11,10 +11,32 @@ public class Stage : MonoBehaviour
 
     public bool isActive;//ステージがアクティブか
 
+    //クリア設定
+    public GameObject clearMarker;//クリアを判定するグリッドの位置
+    public bool isCleared = false;//クリア済み判定
+
+    //初期位置
+    public GameObject initMarker;//スポーンを判定するグリッドの位置
+
+    //カメラ設定
+    public GameObject cameraMarker;//カメラを判定するグリッドの位置
+
+    //オブジェクトから変換する変数
+    private Vector2Int clearGridPos;
+    private Vector2Int initGridPos;
+    private Vector3 cameraPos;
+
     void Awake()
     {
         //エネミーはステージの子オブジェクトにする
         stageEnemies.AddRange(GetComponentsInChildren<Enemy>());
+    }
+    void Start()
+    {
+        //GameObjectの位置からグリッド座標を返還
+        if (clearMarker != null) clearGridPos = GridManager.Instance.WorldToGrid(clearMarker.transform.position);
+        if (initMarker != null) initGridPos = GridManager.Instance.WorldToGrid(initMarker.transform.position);
+        if (cameraMarker != null) cameraPos = cameraMarker.transform.position;
     }
 
     //ステージをアクティブにする
@@ -25,6 +47,11 @@ public class Stage : MonoBehaviour
         {
             enemy.SetActive(true);
         }
+
+        //プレイヤーの初期位置を設定
+        if (stagePlayer != null) stagePlayer.SetInitPos(initGridPos);
+        //カメラをLerp遷移
+        CameraManager.Instance.MoveTo(cameraPos);
     }
     //ステージを非アクティブにする
     public void InactiveStage()
@@ -38,6 +65,8 @@ public class Stage : MonoBehaviour
     //リセット呼び出し
     public void ResetStage()
     {
+        if (isCleared) return;//クリア済みならリセットしない
+
         foreach (var enemy in stageEnemies)
         {
             enemy.EnemyReset();
@@ -47,5 +76,24 @@ public class Stage : MonoBehaviour
             stagePlayer.PlayerReset();
         }
     }
+
+    //クリアしているかチェック
+    public void CheckClear()
+    {
+        if (isCleared) return;
+        if (stagePlayer == null) return;
+
+        if(stagePlayer.gridX == clearGridPos.x && stagePlayer.gridY == clearGridPos.y)
+        {
+            isCleared = true;
+            OnClear();
+        }
+    }
+    //クリア時処理
+    void OnClear()
+    {
+        //処理なし
+    }
+
 
 }

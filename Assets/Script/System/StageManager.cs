@@ -60,5 +60,11 @@ public class StageManager : MonoBehaviour
         currentStage.InactiveStage();
         currentStage = null;
     }
+    //現在のステージがクリアしているかチェック
+    public void CheckCurrentStageClear()
+    {
+        if (currentStage == null) return;
+        currentStage.CheckClear();
+    }
 
 }

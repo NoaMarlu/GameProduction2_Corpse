@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     SpriteRenderer spr;
     private PlayerVisual visual;
 
-    private void Awake()
+    void Awake()
     {
         spr = GetComponent<SpriteRenderer>();
         visual = GetComponent<PlayerVisual>();
@@ -142,6 +142,12 @@ public class Player : MonoBehaviour
 
         if (dir != Vector2Int.zero) TurnManager.Instance.FireArrow(dir);
 
+    }
+    //リスポーン位置の設定
+    public void SetInitPos(Vector2Int vec)
+    {
+        initGridX = vec.x;
+        initGridY = vec.y;
     }
 
 }

@@ -80,6 +80,7 @@ public class TurnManager : MonoBehaviour
         CheckPlayerEnemyCollision();
         CheckDecay();
         CheckSwitchDoor();
+        CheckClear();
 
         turnState = TurnState.Wait;
     }
@@ -147,5 +148,7 @@ public class TurnManager : MonoBehaviour
             if (enemyCell != null && (enemyCell.type & GridManager.GridType.Decay) != 0) enemy.HitArrow();
         }
     }
+    //クリアチェック
+    void CheckClear() { StageManager.Instance.CheckCurrentStageClear(); }
 
 }
