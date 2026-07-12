@@ -22,6 +22,11 @@ public class GridManager : MonoBehaviour
         Decay                    = 1<<2,   //腐敗マス
     }
 
+    //グリッドのライン描画
+    public Material lineMaterial;
+    public Color lineColor = Color.white;
+    public float lineWidth = 0.05f;
+
     public class Cell
     {
         public int x, y;
@@ -58,7 +63,8 @@ public class GridManager : MonoBehaviour
             }
         }
         DrawGrid();
-}
+        GenerateLine();
+    }
     //グリッド番号から座標を取得
     public Vector3 GridToWorld(int x, int y)  {return new Vector3(x * cellSize+ cellSize * 0.5f, y * cellSize+ cellSize * 0.5f, 0); }
     //座標からグリッド番号を取得
@@ -103,6 +109,44 @@ public class GridManager : MonoBehaviour
             Vector3 end = new Vector3(width * cellSize, y * cellSize, 0);
             Gizmos.DrawLine(start, end);
         }
+    }
+
+    //ライン生成用関数
+    void GenerateLine()
+    {
+        for (int x = 0; x <= width; x++)
+        {
+            Vector3 start = new Vector3(x * cellSize, 0, 0);
+            Vector3 end = new Vector3(x * cellSize, height * cellSize, 0);
+            CreateLine(start, end);
+        }
+        for (int y = 0; y <= height; y++)
+        {
+            Vector3 start = new Vector3(0, y * cellSize, 0);
+            Vector3 end = new Vector3(width * cellSize, y * cellSize, 0);
+            CreateLine(start, end);
+        }
+    }
+
+    //ライン描画用関数
+    void CreateLine(Vector3 start,Vector3 end)
+    {
+        GameObject lineObj = new GameObject("GridLine");
+        lineObj.transform.SetParent(this.transform);
+
+        LineRenderer lr = lineObj.AddComponent<LineRenderer>();
+        lr.material = lineMaterial ? lineMaterial : new Material(Shader.Find("Sprites/Default"));
+        lr.startColor = lineColor;
+        lr.endColor = lineColor;
+        lr.startWidth = lineWidth;
+        lr.endWidth = lineWidth;
+        lr.sortingOrder = 30;
+
+        //Z座標を0にして2D表示する
+        lr.useWorldSpace = true;
+        lr.positionCount = 2;
+        lr.SetPosition(0, start);
+        lr.SetPosition(1, end);
     }
 
 
