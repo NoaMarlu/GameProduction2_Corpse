@@ -22,9 +22,11 @@ public class Player : MonoBehaviour
     public Sprite[] shotPlayer;
     private Animator animator;
     private PlayerVisual visual;
+    private bool lastShotFlipX = false;//最後に撃った左右の方向
+    private bool wasShotHorizontal = false;//左右に撃ったか
 
     //ショット
-    private float shotNum;//左1,右2,上3,下4
+    private float shotNum;//左右1,上2,下3
 
     void Awake()
     {
@@ -150,10 +152,20 @@ public class Player : MonoBehaviour
         if (dir != Vector2Int.zero)
         {
             //スプライト用にshotNumを変更
-            if (dir == Vector2Int.left) shotNum = 1;
-            if(dir == Vector2Int.right)shotNum = 2;
-            if (dir == Vector2Int.up) shotNum = 3;
-            if (dir == Vector2Int.down) shotNum = 4;
+            if (dir == Vector2Int.left)
+            {
+                shotNum = 1;
+                lastShotFlipX = false;
+                wasShotHorizontal = true;
+            }
+            if(dir == Vector2Int.right)
+            {
+                shotNum = 1; 
+                lastShotFlipX = true;
+                wasShotHorizontal = true;
+            }
+            if (dir == Vector2Int.up) shotNum = 2;
+            if (dir == Vector2Int.down) shotNum = 3;
             //ショット
             TurnManager.Instance.FireArrow(dir); 
         }
@@ -174,9 +186,11 @@ public class Player : MonoBehaviour
             //アニメーターの停止
             animator.enabled = false;
             //スプライトの変更
-            for (int i = 0; i < 4; i++) 
+            for (int i = 0; i < 3; i++) 
             {
-               if (shotNum == i+1) spr.sprite = shotPlayer[i];
+                //左右に撃ったら撃った方向を向く
+                if (wasShotHorizontal) spr.flipX = lastShotFlipX;
+                if (shotNum == i+1) spr.sprite = shotPlayer[i];
             }
         }
         else animator.enabled = true;

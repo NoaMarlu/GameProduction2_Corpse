@@ -16,6 +16,17 @@ public class Arrow : MonoBehaviour
     //エフェクト
     public GameObject bomb;
 
+    //SE
+    private AudioSource audioSource;
+    public AudioClip shotSE;
+
+    void Awake()
+    {
+        //生成時にSE再生
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(shotSE);
+    }
+
     //発射時に呼ぶ
     public void Fire(int startX,int startY,Vector2Int dir)
     {
