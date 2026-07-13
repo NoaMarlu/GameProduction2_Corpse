@@ -147,8 +147,6 @@ public class Enemy : MonoBehaviour
     void ChangeCorpse() 
     {
         if (isCorpse) return;
-        //Prototype用
-        GetComponent<SpriteRenderer>().color = Color.black;
         //壁判定
         var Cell = GridManager.Instance.GetCell(gridX, gridY);
         if(Cell != null)Cell.isWalk = false;
