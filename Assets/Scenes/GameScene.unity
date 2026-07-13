@@ -7814,9 +7814,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3800266730724113150, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.0114943
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800266730724113150, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.1034483
+      objectReference: {fileID: 0}
     - target: {fileID: 4208973602979761177, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.5
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 4208973602979761177, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7857,6 +7865,34 @@ PrefabInstance:
     - target: {fileID: 4211843255736304983, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251692800109565209, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554865083314807035, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
+      propertyPath: shotPlayer.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554865083314807035, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
+      propertyPath: 'shotPlayer.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: bc64d479cb9402443b0cb05943c55140, type: 3}
+    - target: {fileID: 4554865083314807035, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
+      propertyPath: 'shotPlayer.Array.data[1]'
+      value: 
+      objectReference: {fileID: -8076600111263884880, guid: 202ca0a527512d648952b948fecd9b26, type: 3}
+    - target: {fileID: 4554865083314807035, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
+      propertyPath: 'shotPlayer.Array.data[2]'
+      value: 
+      objectReference: {fileID: -1397558259637950999, guid: 0276f1cb29e82824bb91f949c6ca8f42, type: 3}
+    - target: {fileID: 4554865083314807035, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
+      propertyPath: 'shotPlayer.Array.data[3]'
+      value: 
+      objectReference: {fileID: -7403527525666277663, guid: daad8d9f0c6a7e04ba78a5e8b29e633b, type: 3}
+    - target: {fileID: 5169471115366932067, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,3 +1,4 @@
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static GridManager;
@@ -17,12 +18,18 @@ public class Player : MonoBehaviour
     private int initGridY;
 
     //スプライト
-    SpriteRenderer spr;
+    private SpriteRenderer spr;
+    public Sprite[] shotPlayer;
+    private Animator animator;
     private PlayerVisual visual;
+
+    //ショット
+    private float shotNum;//左1,右2,上3,下4
 
     void Awake()
     {
         spr = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         visual = GetComponent<PlayerVisual>();
     }
     void Start()
@@ -38,6 +45,7 @@ public class Player : MonoBehaviour
     {
         PlayerInput();
         ArrowInput();
+        ChangeSprite();
     }
 
     //座標の設定
@@ -139,7 +147,16 @@ public class Player : MonoBehaviour
             if (Keyboard.current.leftArrowKey.wasPressedThisFrame) dir = Vector2Int.left;
             if (Keyboard.current.rightArrowKey.wasPressedThisFrame) dir = Vector2Int.right;
         }
-        if (dir != Vector2Int.zero) TurnManager.Instance.FireArrow(dir);
+        if (dir != Vector2Int.zero)
+        {
+            //スプライト用にshotNumを変更
+            if (dir == Vector2Int.left) shotNum = 1;
+            if(dir == Vector2Int.right)shotNum = 2;
+            if (dir == Vector2Int.up) shotNum = 3;
+            if (dir == Vector2Int.down) shotNum = 4;
+            //ショット
+            TurnManager.Instance.FireArrow(dir); 
+        }
 
     }
     //リスポーン位置の設定
@@ -147,6 +164,22 @@ public class Player : MonoBehaviour
     {
         initGridX = vec.x;
         initGridY = vec.y;
+    }
+    //スプライト管理
+    public void ChangeSprite()
+    {
+        //ショット時にスプライト変更
+        if(TurnManager.Instance.turnState == TurnManager.TurnState.Arrow)
+        {
+            //アニメーターの停止
+            animator.enabled = false;
+            //スプライトの変更
+            for (int i = 0; i < 4; i++) 
+            {
+               if (shotNum == i+1) spr.sprite = shotPlayer[i];
+            }
+        }
+        else animator.enabled = true;
     }
 
 }
