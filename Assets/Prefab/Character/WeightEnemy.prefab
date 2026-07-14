@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6293454488183308290}
   - component: {fileID: 2737260977337391727}
   - component: {fileID: 5922507649436590592}
+  - component: {fileID: 8080821380718673355}
   m_Layer: 0
   m_Name: WeightEnemy
   m_TagString: Untagged
@@ -82,12 +83,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 50
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.123249054, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b112d27a1b64c3343bb933c098d628c2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.25, y: 1.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -111,3 +112,23 @@ MonoBehaviour:
   moveMode: 1
   corpseMode: 1
   decayPrefab: {fileID: 0}
+--- !u!114 &8080821380718673355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553133508567542560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2a6394b407adaf4a8323cbb4569b0f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerVisual
+  stretchX: 0.9
+  stretchY: 0.9
+  squashX: 0.9
+  squashY: 0.9
+  stretchDuration: 0.08
+  squashDuration: 0.06
+  returnDuration: 0.1
+  dustParticle: {fileID: 0}

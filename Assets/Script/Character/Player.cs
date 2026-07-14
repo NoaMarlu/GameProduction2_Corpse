@@ -1,3 +1,4 @@
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static GridManager;
@@ -17,12 +18,20 @@ public class Player : MonoBehaviour
     private int initGridY;
 
     //スプライト
-    SpriteRenderer spr;
+    private SpriteRenderer spr;
+    public Sprite[] shotPlayer;
+    private Animator animator;
     private PlayerVisual visual;
+    private bool lastShotFlipX = false;//最後に撃った左右の方向
+    private bool wasShotHorizontal = false;//左右に撃ったか
+
+    //ショット
+    private float shotNum;//左右1,上2,下3
 
     void Awake()
     {
         spr = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         visual = GetComponent<PlayerVisual>();
     }
     void Start()
@@ -38,6 +47,7 @@ public class Player : MonoBehaviour
     {
         PlayerInput();
         ArrowInput();
+        ChangeSprite();
     }
 
     //座標の設定
@@ -46,11 +56,36 @@ public class Player : MonoBehaviour
     public void PlayerInput()
     {
         Vector2Int dir = Vector2Int.zero;
+
         //入力
-        if (Keyboard.current.wKey.wasPressedThisFrame) { dir = Vector2Int.up; }
-        if (Keyboard.current.aKey.wasPressedThisFrame) { dir = Vector2Int.left; }
-        if (Keyboard.current.sKey.wasPressedThisFrame) { dir = Vector2Int.down; }
-        if (Keyboard.current.dKey.wasPressedThisFrame) { dir = Vector2Int.right; }
+        if(Gamepad.current != null)
+        {
+            //斜め入力防止
+            Vector2 stickInput = Gamepad.current.leftStick.ReadValue();
+            float stickValue = 0.5f;
+
+            //stickValue以上入力が掛かったら
+            if (stickInput.magnitude >= stickValue)
+            {
+                if(Mathf.Abs(stickInput.x) > Mathf.Abs(stickInput.y))//左右値が強かった場合
+                {
+                    if (stickInput.x > 0 && Gamepad.current.leftStick.right.wasPressedThisFrame) dir = Vector2Int.right;
+                    else if (stickInput.x < 0 && Gamepad.current.leftStick.left.wasPressedThisFrame) dir = Vector2Int.left;
+                }
+                else//上下値が強かった場合
+                {
+                    if (stickInput.y > 0 && Gamepad.current.leftStick.up.wasPressedThisFrame) dir = Vector2Int.up;
+                    else if (stickInput.y < 0 && Gamepad.current.leftStick.down.wasPressedThisFrame) dir = Vector2Int.down;
+                }
+            }
+        }
+        else
+        {
+            if (Keyboard.current.wKey.wasPressedThisFrame) { dir = Vector2Int.up; }
+            if (Keyboard.current.aKey.wasPressedThisFrame) { dir = Vector2Int.left; }
+            if (Keyboard.current.sKey.wasPressedThisFrame) { dir = Vector2Int.down; }
+            if (Keyboard.current.dKey.wasPressedThisFrame) { dir = Vector2Int.right; }
+        }
 
         //directionが変わったら通知
         if(dir != Vector2Int.zero)
@@ -139,7 +174,26 @@ public class Player : MonoBehaviour
             if (Keyboard.current.leftArrowKey.wasPressedThisFrame) dir = Vector2Int.left;
             if (Keyboard.current.rightArrowKey.wasPressedThisFrame) dir = Vector2Int.right;
         }
-        if (dir != Vector2Int.zero) TurnManager.Instance.FireArrow(dir);
+        if (dir != Vector2Int.zero)
+        {
+            //スプライト用にshotNumを変更
+            if (dir == Vector2Int.left)
+            {
+                shotNum = 1;
+                lastShotFlipX = false;
+                wasShotHorizontal = true;
+            }
+            if(dir == Vector2Int.right)
+            {
+                shotNum = 1; 
+                lastShotFlipX = true;
+                wasShotHorizontal = true;
+            }
+            if (dir == Vector2Int.up) shotNum = 2;
+            if (dir == Vector2Int.down) shotNum = 3;
+            //ショット
+            TurnManager.Instance.FireArrow(dir); 
+        }
 
     }
     //リスポーン位置の設定
@@ -147,6 +201,24 @@ public class Player : MonoBehaviour
     {
         initGridX = vec.x;
         initGridY = vec.y;
+    }
+    //スプライト管理
+    public void ChangeSprite()
+    {
+        //ショット時にスプライト変更
+        if(TurnManager.Instance.turnState == TurnManager.TurnState.Arrow)
+        {
+            //アニメーターの停止
+            animator.enabled = false;
+            //スプライトの変更
+            for (int i = 0; i < 3; i++) 
+            {
+                //左右に撃ったら撃った方向を向く
+                if (wasShotHorizontal) spr.flipX = lastShotFlipX;
+                if (shotNum == i+1) spr.sprite = shotPlayer[i];
+            }
+        }
+        else animator.enabled = true;
     }
 
 }

@@ -276,6 +276,10 @@ MonoBehaviour:
   gridX: 0
   gridY: 0
   lastDirection: {x: 0, y: 0}
+  shotPlayer:
+  - {fileID: 21300000, guid: bc64d479cb9402443b0cb05943c55140, type: 3}
+  - {fileID: -1397558259637950999, guid: 0276f1cb29e82824bb91f949c6ca8f42, type: 3}
+  - {fileID: -7403527525666277663, guid: daad8d9f0c6a7e04ba78a5e8b29e633b, type: 3}
 --- !u!114 &1987329721834732902
 MonoBehaviour:
   m_ObjectHideFlags: 0

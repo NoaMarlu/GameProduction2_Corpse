@@ -41,6 +41,9 @@ public class Enemy : MonoBehaviour
     public GameObject decayPrefab;//腐敗しているマス用のプレハブ
     private List<GameObject> decayObjects = new List<GameObject>();
 
+    //アニメーション用
+    private PlayerVisual visual;
+
     void Awake()
     {
         //数値設定
@@ -50,6 +53,7 @@ public class Enemy : MonoBehaviour
             case MoveMode.RightToLeft: lastDirection =new Vector2Int(1,0); break;
             case MoveMode.UpToDown: UpToDownFunc(); break;
         }
+        visual = GetComponent<PlayerVisual>();
     }
     void Start()
     {
@@ -79,6 +83,12 @@ public class Enemy : MonoBehaviour
             case MoveMode.RightToLeft:  RightToLeftFunc();  break;
             case MoveMode.UpToDown:   UpToDownFunc();   break;
         }
+
+        //方向にあわせてスプライトを変更
+        if (lastDirection.x != 0) GetComponent<SpriteRenderer>().flipX = lastDirection.x > 0;
+
+        //移動アニメーション
+        visual?.PlayMoveStretch(lastDirection);
     }
 
     //移動系関数
@@ -137,8 +147,6 @@ public class Enemy : MonoBehaviour
     void ChangeCorpse() 
     {
         if (isCorpse) return;
-        //Prototype用
-        GetComponent<SpriteRenderer>().color = Color.black;
         //壁判定
         var Cell = GridManager.Instance.GetCell(gridX, gridY);
         if(Cell != null)Cell.isWalk = false;
@@ -238,8 +246,6 @@ public class Enemy : MonoBehaviour
         lastDirection = initDirection;
         SnapToGrid();
 
-        //Prototype用
-        GetComponent<SpriteRenderer>().color = Color.red;
         //ターンマネージャーに登録
         TurnManager.Instance.AddEnemy(this);
     }
