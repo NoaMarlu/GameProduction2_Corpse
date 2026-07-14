@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
         {
             case MoveMode.None:   /*処理なし*/    break;
             case MoveMode.RightToLeft: lastDirection =new Vector2Int(1,0); break;
-            case MoveMode.UpToDown: UpToDownFunc(); break;
+            case MoveMode.UpToDown: lastDirection = new Vector2Int(0, 1); break;
         }
         visual = GetComponent<PlayerVisual>();
     }
