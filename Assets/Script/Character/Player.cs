@@ -56,11 +56,36 @@ public class Player : MonoBehaviour
     public void PlayerInput()
     {
         Vector2Int dir = Vector2Int.zero;
+
         //“ü—Í
-        if (Keyboard.current.wKey.wasPressedThisFrame) { dir = Vector2Int.up; }
-        if (Keyboard.current.aKey.wasPressedThisFrame) { dir = Vector2Int.left; }
-        if (Keyboard.current.sKey.wasPressedThisFrame) { dir = Vector2Int.down; }
-        if (Keyboard.current.dKey.wasPressedThisFrame) { dir = Vector2Int.right; }
+        if(Gamepad.current != null)
+        {
+            //ŽÎ‚ß“ü—Í–hŽ~
+            Vector2 stickInput = Gamepad.current.leftStick.ReadValue();
+            float stickValue = 0.5f;
+
+            //stickValueˆÈã“ü—Í‚ªŠ|‚©‚Á‚½‚ç
+            if (stickInput.magnitude >= stickValue)
+            {
+                if(Mathf.Abs(stickInput.x) > Mathf.Abs(stickInput.y))//¶‰E’l‚ª‹­‚©‚Á‚½ê‡
+                {
+                    if (stickInput.x > 0 && Gamepad.current.leftStick.right.wasPressedThisFrame) dir = Vector2Int.right;
+                    else if (stickInput.x < 0 && Gamepad.current.leftStick.left.wasPressedThisFrame) dir = Vector2Int.left;
+                }
+                else//ã‰º’l‚ª‹­‚©‚Á‚½ê‡
+                {
+                    if (stickInput.y > 0 && Gamepad.current.leftStick.up.wasPressedThisFrame) dir = Vector2Int.up;
+                    else if (stickInput.y < 0 && Gamepad.current.leftStick.down.wasPressedThisFrame) dir = Vector2Int.down;
+                }
+            }
+        }
+        else
+        {
+            if (Keyboard.current.wKey.wasPressedThisFrame) { dir = Vector2Int.up; }
+            if (Keyboard.current.aKey.wasPressedThisFrame) { dir = Vector2Int.left; }
+            if (Keyboard.current.sKey.wasPressedThisFrame) { dir = Vector2Int.down; }
+            if (Keyboard.current.dKey.wasPressedThisFrame) { dir = Vector2Int.right; }
+        }
 
         //direction‚ª•Ï‚í‚Á‚½‚ç’Ê’m
         if(dir != Vector2Int.zero)
