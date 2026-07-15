@@ -47,8 +47,13 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     public Sprite dieSpr;
 
+    //SE
+    private AudioSource audioSource;
+    public AudioClip damageClip;
+
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         spr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         //数値設定
@@ -162,6 +167,8 @@ public class Enemy : MonoBehaviour
         //見た目関連
         if (dieSpr != null) spr.sprite = dieSpr;
         if(animator != null)animator.enabled = false;
+        //SE
+        audioSource.PlayOneShot(damageClip);
         //移動停止
         TurnManager.Instance.RemoveEnemy(this);
     }
