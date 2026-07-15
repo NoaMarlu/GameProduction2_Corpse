@@ -41,11 +41,16 @@ public class Enemy : MonoBehaviour
     public GameObject decayPrefab;//腐敗しているマス用のプレハブ
     private List<GameObject> decayObjects = new List<GameObject>();
 
-    //アニメーション用
+    //スプライト用
     private PlayerVisual visual;
+    private SpriteRenderer spr;
+    private Animator animator;
+    public Sprite dieSpr;
 
     void Awake()
     {
+        spr = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         //数値設定
         switch (moveMode)
         {
@@ -154,6 +159,9 @@ public class Enemy : MonoBehaviour
         CorpseEffect();
         //遺体フラグ
         isCorpse = true;
+        //見た目関連
+        if (dieSpr != null) spr.sprite = dieSpr;
+        if(animator != null)animator.enabled = false;
         //移動停止
         TurnManager.Instance.RemoveEnemy(this);
     }
@@ -245,7 +253,8 @@ public class Enemy : MonoBehaviour
         gridY = initGridY;
         lastDirection = initDirection;
         SnapToGrid();
-
+        //見た目関連
+        if(animator != null)animator.enabled = true;
         //ターンマネージャーに登録
         TurnManager.Instance.AddEnemy(this);
     }
