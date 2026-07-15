@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -38,5 +39,7 @@ public class CameraManager : MonoBehaviour
         targetPos = pos;
         isMoving = true;
     }
+    //カメラシェイク
+    public void Shake(float duration = 0.3f, float shakePower = 0.2f, int vibrato = 20) { transform.DOShakePosition(duration, shakePower, vibrato).SetLink(gameObject); }
 
 }

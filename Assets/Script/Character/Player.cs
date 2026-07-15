@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer spr;
     public Sprite[] shotPlayer;
     private Animator animator;
-    private PlayerVisual visual;
+    private CharacterVisual visual;
     private bool lastShotFlipX = false;//ÅŒã‚ÉŒ‚‚Á‚½¶‰E‚Ì•ûŒü
     private bool wasShotHorizontal = false;//¶‰E‚ÉŒ‚‚Á‚½‚©
 
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         spr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        visual = GetComponent<PlayerVisual>();
+        visual = GetComponent<CharacterVisual>();
     }
     void Start()
     {
@@ -228,5 +228,7 @@ public class Player : MonoBehaviour
         }
         else animator.enabled = true;
     }
+    //CharavterVisual‚Ìæ“¾
+    public CharacterVisual GetVisual() { return visual; }
 
 }

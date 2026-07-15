@@ -69,6 +69,7 @@ public class TurnManager : MonoBehaviour
             //実行中に重なってもリセット
             if(enemy.gridX == player.gridX && enemy.gridY == player.gridY)
             {
+                PlayHitEffects();
                 turnState = TurnState.Wait;
                 StageManager.Instance.CurrentStageReset();
                 return;
@@ -92,6 +93,7 @@ public class TurnManager : MonoBehaviour
             //位置が同じならリセット
             if(enemy.gridX == player.gridX && enemy.gridY == player.gridY)
             {
+                PlayHitEffects();
                 StageManager.Instance.CurrentStageReset();
                 return;
             }
@@ -137,6 +139,8 @@ public class TurnManager : MonoBehaviour
         //プレイヤーが腐敗マスにいるか
         if(cell != null && (cell.type & GridManager.GridType.Decay) != 0)
         {
+            PlayHitEffects();
+            turnState = TurnState.Wait;
             StageManager.Instance.CurrentStageReset();
             return;
         }
@@ -150,5 +154,11 @@ public class TurnManager : MonoBehaviour
     }
     //クリアチェック
     void CheckClear() { StageManager.Instance.CheckCurrentStageClear(); }
+
+    void PlayHitEffects()
+    {
+        CameraManager.Instance.Shake();
+        player.GetVisual()?.PlayHitEffect();
+    }
 
 }

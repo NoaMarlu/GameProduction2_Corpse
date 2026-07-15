@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
     private List<GameObject> decayObjects = new List<GameObject>();
 
     //スプライト用
-    private PlayerVisual visual;
+    private CharacterVisual visual;
     private SpriteRenderer spr;
     private Animator animator;
     public Sprite dieSpr;
@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
             case MoveMode.RightToLeft: lastDirection =new Vector2Int(1,0); break;
             case MoveMode.UpToDown: lastDirection = new Vector2Int(0, 1); break;
         }
-        visual = GetComponent<PlayerVisual>();
+        visual = GetComponent<CharacterVisual>();
     }
     void Start()
     {

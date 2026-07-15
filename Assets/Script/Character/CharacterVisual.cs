@@ -1,7 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class PlayerVisual : MonoBehaviour
+public class CharacterVisual : MonoBehaviour
 {
 
     //ストレッチ情報
@@ -17,6 +17,14 @@ public class PlayerVisual : MonoBehaviour
 
     //エフェクト
     public ParticleSystem dustParticle;//砂埃のエフェクト
+
+    //点滅
+    private SpriteRenderer spr;
+
+    void Awake()
+    {
+        spr = GetComponent<SpriteRenderer>();    
+    }
 
     //移動開始時
     public void PlayMoveStretch(Vector2Int direction)
@@ -50,12 +58,25 @@ public class PlayerVisual : MonoBehaviour
         //砂埃エフェクト
         currentSequence.InsertCallback(stretchDuration, PlayDust);
     }
-
+    //砂埃エフェクト
     void PlayDust()
     {
         if (dustParticle == null) return;
         dustParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         dustParticle.Play();
+    }
+    //点滅
+    public void PlayHitEffect()
+    {
+        //実行中の点滅があればキャンセル
+        spr.DOKill(spr);
+        //点滅
+        spr.DOFade(0f, 0.08f).SetLoops(6, LoopType.Yoyo).SetEase(Ease.Linear).SetTarget(spr).OnComplete(() =>
+            {
+                Color c = spr.color;
+                c.a = 1f;
+                spr.color = c;
+            });
     }
 
 }
