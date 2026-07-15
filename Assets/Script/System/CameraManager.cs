@@ -40,6 +40,6 @@ public class CameraManager : MonoBehaviour
         isMoving = true;
     }
     //カメラシェイク
-    public void Shake(float duration = 0.3f, float shakePower = 0.2f, int vibrato = 20) { transform.DOShakePosition(duration, shakePower, vibrato).SetLink(gameObject); }
+    public void Shake(float duration = 0.3f, float shakePower = 0.5f, int vibrato = 20) { transform.DOShakePosition(duration, shakePower, vibrato).SetLink(gameObject); }
 
 }

@@ -6,6 +6,7 @@ using static GridManager;
 public class Player : MonoBehaviour
 {
 
+    public static Player Instance { get; private set; }
     //グリッド情報
     public int gridX;
     public int gridY;
@@ -31,9 +32,11 @@ public class Player : MonoBehaviour
     //SE
     private AudioSource audioSource;
     public AudioClip moveClip;
+    public AudioClip damageClip;
 
     void Awake()
     {
+        Instance = this;
         audioSource = GetComponent<AudioSource>();
         spr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -230,5 +233,7 @@ public class Player : MonoBehaviour
     }
     //CharavterVisualの取得
     public CharacterVisual GetVisual() { return visual; }
+    //敵衝突時のダメージ再生
+    public void DamageSE() { audioSource.PlayOneShot(damageClip); }
 
 }

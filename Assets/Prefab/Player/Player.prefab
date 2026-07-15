@@ -282,6 +282,7 @@ MonoBehaviour:
   - {fileID: -1397558259637950999, guid: 0276f1cb29e82824bb91f949c6ca8f42, type: 3}
   - {fileID: -7403527525666277663, guid: daad8d9f0c6a7e04ba78a5e8b29e633b, type: 3}
   moveClip: {fileID: 8300000, guid: e76b177565a769c438b36458dc9d730e, type: 3}
+  damageClip: {fileID: 8300000, guid: 0c243a78f311b77458d9ef5b77a68410, type: 3}
 --- !u!114 &1987329721834732902
 MonoBehaviour:
   m_ObjectHideFlags: 0
