@@ -28,8 +28,13 @@ public class Player : MonoBehaviour
     //ショット
     private float shotNum;//左右1,上2,下3
 
+    //SE
+    private AudioSource audioSource;
+    public AudioClip moveClip;
+
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         spr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         visual = GetComponent<PlayerVisual>();
@@ -127,6 +132,9 @@ public class Player : MonoBehaviour
 
         //方向にあわせてスプライトを変更
         if (lastDirection.x != 0)spr.flipX = lastDirection.x > 0;
+
+        //SE
+        audioSource.PlayOneShot(moveClip);
 
         //移動アニメーション
         visual?.PlayMoveStretch(lastDirection);
