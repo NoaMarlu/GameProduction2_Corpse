@@ -102,6 +102,7 @@ public class Stage : MonoBehaviour
         if(allEnemiesDefeated && onClearGrid)
         {
             isCleared = true;
+            StageManager.Instance.PlayClearSE();
             OnClear();
         }
     }

@@ -10,9 +10,14 @@ public class StageManager : MonoBehaviour
 
     private Stage currentStage;
 
+    //SE
+    private AudioSource audioSource;
+    public AudioClip clearClip;
+
     void Awake()
     {
         Instance = this;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -67,5 +72,7 @@ public class StageManager : MonoBehaviour
         if (currentStage == null) return;
         currentStage.CheckClear();
     }
+    //ステージクリア時に呼び出し
+    public void PlayClearSE() { audioSource.PlayOneShot(clearClip); }
 
 }
