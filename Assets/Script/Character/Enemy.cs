@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 
+
 public class Enemy : MonoBehaviour
 {
 
@@ -44,6 +45,7 @@ public class Enemy : MonoBehaviour
     //スプライト用
     private CharacterVisual visual;
     private SpriteRenderer spr;
+    private Sprite initSpr;
     private Animator animator;
     public Sprite dieSpr;
 
@@ -53,6 +55,7 @@ public class Enemy : MonoBehaviour
 
     void Awake()
     {
+        initSpr = GetComponent<SpriteRenderer>().sprite;
         audioSource = GetComponent<AudioSource>();
         spr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -157,20 +160,26 @@ public class Enemy : MonoBehaviour
     void ChangeCorpse() 
     {
         if (isCorpse) return;
-        //壁判定
-        var Cell = GridManager.Instance.GetCell(gridX, gridY);
-        if(Cell != null)Cell.isWalk = false;
-        //効果設定
-        CorpseEffect();
         //遺体フラグ
         isCorpse = true;
-        //見た目関連
-        if (dieSpr != null) spr.sprite = dieSpr;
-        if(animator != null)animator.enabled = false;
-        //SE
-        audioSource.PlayOneShot(damageClip);
         //移動停止
         TurnManager.Instance.RemoveEnemy(this);
+        //SE
+        audioSource.PlayOneShot(damageClip);
+        //設定変更
+        ApplyCorpseLogic();
+        //アニメーション開始
+        if (animator != null) animator.SetTrigger("Die");
+        else ApplyCorpseVisual();
+    }
+    //見た目を遺体にする
+    public void ApplyCorpseVisual() {  if (dieSpr != null) spr.sprite = dieSpr;  }
+    //設定遺体化
+    public void ApplyCorpseLogic()
+    {
+        var cell = GridManager.Instance.GetCell(gridX, gridY);
+        if (cell != null) cell.isWalk = false;
+        CorpseEffect();
     }
     //遺体効果
     void CorpseEffect()
@@ -246,6 +255,7 @@ public class Enemy : MonoBehaviour
     //リセット
     public void EnemyReset()
     {
+
         //遺体だったら
         if (isCorpse)
         {
@@ -261,7 +271,15 @@ public class Enemy : MonoBehaviour
         lastDirection = initDirection;
         SnapToGrid();
         //見た目関連
-        if(animator != null)animator.enabled = true;
+        if (spr != null) spr.sprite = initSpr;
+        //アニメーションを最初から
+        if(animator != null)
+        {
+            animator.enabled = true;
+            animator.ResetTrigger("Die");
+            animator.Rebind();
+            animator.Update(0f);
+        }
         //ターンマネージャーに登録
         TurnManager.Instance.AddEnemy(this);
     }
