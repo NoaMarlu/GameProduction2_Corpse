@@ -25,6 +25,9 @@ public class Player : MonoBehaviour
     private CharacterVisual visual;
     private bool lastShotFlipX = false;//最後に撃った左右の方向
     private bool wasShotHorizontal = false;//左右に撃ったか
+    private Sprite initSpr;
+    private Sprite dieSpr;
+    private bool isResetting = false;
 
     //ショット
     private float shotNum;//左右1,上2,下3
@@ -41,6 +44,7 @@ public class Player : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         visual = GetComponent<CharacterVisual>();
+        initSpr = spr.sprite;
     }
     void Start()
     {
@@ -63,6 +67,7 @@ public class Player : MonoBehaviour
     //移動入力処理
     public void PlayerInput()
     {
+        if (isResetting) return;
         Vector2Int dir = Vector2Int.zero;
 
         //入力
@@ -159,14 +164,42 @@ public class Player : MonoBehaviour
     //リセット
     public void PlayerReset()
     {
+        //アニメーション関連
+        if (isResetting) return;
+        isResetting = true;
+
+        if(animator != null)
+        {
+            animator.enabled = true;
+            animator.SetTrigger("Die");
+        }
+        else
+        {
+            if (dieSpr != null) spr.sprite = dieSpr;
+            FinishPlayerReset();
+        }
+    }
+    public void FinishPlayerReset()
+    {
+        //位置設定
         gridX = initGridX;
         gridY = initGridY;
         lastDirection = Vector2Int.zero;
         SnapToGrid();
+        //見た目
+        if (spr != null) spr.sprite = initSpr;
+        if (animator != null)
+        {
+            animator.Rebind();
+            animator.Update(0f);
+        }
+        isResetting = false;
+        visual?.PlayHitEffect();
     }
     //矢の発射
     public void ArrowInput()
     {
+        if (isResetting) return;
         Vector2Int dir = Vector2Int.zero;
 
         if(Gamepad.current != null)

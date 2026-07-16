@@ -164,10 +164,6 @@ public class TurnManager : MonoBehaviour
     //クリアチェック
     void CheckClear() { StageManager.Instance.CheckCurrentStageClear(); }
 
-    void PlayHitEffects()
-    {
-        CameraManager.Instance.Shake();
-        player.GetVisual()?.PlayHitEffect();
-    }
+    void PlayHitEffects() { CameraManager.Instance.Shake();}
 
 }
