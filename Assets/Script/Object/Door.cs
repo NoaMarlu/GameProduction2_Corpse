@@ -1,7 +1,6 @@
-using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
+using DG.Tweening;
 
 public class Door : MonoBehaviour
 {
@@ -14,8 +13,12 @@ public class Door : MonoBehaviour
 
     //スプライト
     private SpriteRenderer spr;
-    public Sprite ONspr;
-    public Sprite OFFspr;
+    public Sprite[] doorSprites;
+
+    //アニメーション
+    public float frameDuration = 0.05f;
+    private float currentFrame = 0f;
+    private Tween frameTween;
 
     void Awake()
     {
@@ -30,11 +33,9 @@ public class Door : MonoBehaviour
         transform.position = GridManager.Instance.GridToWorld(gridX, gridY);
 
         TurnManager.Instance.AddDoor(this);
+        currentFrame = 0f;
+        UpdateSprite();
         AddState(false);
-    }
-    void Update()
-    {
-        ChangeSprite();  
     }
 
     //ドアの状態チェック
@@ -49,23 +50,45 @@ public class Door : MonoBehaviour
                 isOpen = false;
                 break;
             }
-            if (linkSwitches.Count == 0) isOpen = false;
         }
+        if (linkSwitches.Count == 0) isOpen = false;
         AddState(isOpen);
-
     }
     //オープンならセルの状態を変化
     void AddState(bool open)
     {
+        bool changed = (isOpen != open);
         isOpen = open;
+
         var cell = GridManager.Instance.GetCell(gridX, gridY);
+
         if (cell != null) cell.isWalk = open;
+        if (changed) PlayFrameAnimation();
     }
-    //スプライト管理
-    void ChangeSprite()
+    //アニメーション再生
+    void PlayFrameAnimation()
     {
-        if (isOpen) spr.sprite = ONspr;
-        else spr.sprite = OFFspr;
+        frameTween?.Kill();
+        float targetFrame = isOpen ? (doorSprites.Length - 1) : 0f;
+
+        float distance = Mathf.Abs(targetFrame - currentFrame);
+        float duration = distance * frameDuration;
+
+        frameTween = DOTween.To(
+            () => currentFrame,
+            x => { currentFrame = x; UpdateSprite(); },
+            targetFrame,
+            duration
+            ).SetEase(Ease.Linear);
+
+    }
+    //currentFrameによってスプライトを変更
+    void UpdateSprite()
+    {
+        if (doorSprites == null || doorSprites.Length == 0) return;
+        int index = Mathf.RoundToInt(currentFrame);
+        index = Mathf.Clamp(index, 0,doorSprites.Length - 1);
+        spr.sprite = doorSprites[index];
     }
 
 }

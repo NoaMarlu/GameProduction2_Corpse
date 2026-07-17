@@ -106,3 +106,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   linkSwitches:
   - {fileID: 0}
+  doorSprites:
+  - {fileID: -3554163718566507684, guid: 6d52e04629758a14d867748600dedf55, type: 3}
+  - {fileID: 3295208463947906568, guid: 6d52e04629758a14d867748600dedf55, type: 3}
+  - {fileID: -7952541556157453123, guid: 6d52e04629758a14d867748600dedf55, type: 3}
+  - {fileID: 1850172389431481278, guid: 6d52e04629758a14d867748600dedf55, type: 3}
+  - {fileID: 1435109505832262967, guid: 6d52e04629758a14d867748600dedf55, type: 3}
+  frameDuration: 0.05
