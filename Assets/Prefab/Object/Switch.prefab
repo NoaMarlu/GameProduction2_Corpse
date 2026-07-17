@@ -106,8 +106,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Switch
   isOn: 0
-  ONspr: {fileID: 8453945132938055968, guid: db92fa05742de8a45bb767fd127dd0dc, type: 3}
-  OFFspr: {fileID: 6551467404924528531, guid: cb8ac77d47ead03418b4d463c98180a1, type: 3}
+  switchSprites:
+  - {fileID: 996378180676535244, guid: cf9ebcdbc8a8faf4bb8e2e45c4b76ca0, type: 3}
+  - {fileID: -64013981571187246, guid: cf9ebcdbc8a8faf4bb8e2e45c4b76ca0, type: 3}
+  - {fileID: 1340094629, guid: cf9ebcdbc8a8faf4bb8e2e45c4b76ca0, type: 3}
+  - {fileID: 1829968169, guid: cf9ebcdbc8a8faf4bb8e2e45c4b76ca0, type: 3}
+  frameDuration: 0.05
 --- !u!1 &5920345611282808820
 GameObject:
   m_ObjectHideFlags: 0
