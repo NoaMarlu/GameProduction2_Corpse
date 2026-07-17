@@ -82,6 +82,7 @@ public class TurnManager : MonoBehaviour
         CheckPlayerEnemyCollision();
         CheckDecay();
         CheckSwitchDoor();
+        CheckPlayerTrapped();
         CheckClear();
 
         turnState = TurnState.Wait;
@@ -174,5 +175,11 @@ public class TurnManager : MonoBehaviour
         isDying = false;
     }
     void PlayHitEffects() { CameraManager.Instance.Shake();}
+    //プレイヤーの位置が壁になってないか確認
+    void CheckPlayerTrapped()
+    {
+        var cell = GridManager.Instance.GetCell(player.gridX, player.gridY);
+        if (cell != null && !cell.isWalk) { TriggerPlayerDie(); }
+    }
 
 }

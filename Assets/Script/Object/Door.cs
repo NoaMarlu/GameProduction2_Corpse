@@ -12,6 +12,15 @@ public class Door : MonoBehaviour
     private int gridY;
     private bool isOpen = false;
 
+    //スプライト
+    private SpriteRenderer spr;
+    public Sprite ONspr;
+    public Sprite OFFspr;
+
+    void Awake()
+    {
+        spr = GetComponent<SpriteRenderer>();    
+    }
     void Start()
     {
         //位置設定
@@ -22,6 +31,10 @@ public class Door : MonoBehaviour
 
         TurnManager.Instance.AddDoor(this);
         AddState(false);
+    }
+    void Update()
+    {
+        ChangeSprite();  
     }
 
     //ドアの状態チェック
@@ -47,6 +60,12 @@ public class Door : MonoBehaviour
         isOpen = open;
         var cell = GridManager.Instance.GetCell(gridX, gridY);
         if (cell != null) cell.isWalk = open;
+    }
+    //スプライト管理
+    void ChangeSprite()
+    {
+        if (isOpen) spr.sprite = ONspr;
+        else spr.sprite = OFFspr;
     }
 
 }
