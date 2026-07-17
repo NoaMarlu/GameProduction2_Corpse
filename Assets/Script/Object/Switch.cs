@@ -8,6 +8,15 @@ public class Switch : MonoBehaviour
     private int gridX;
     private int gridY;
 
+    //スプライト
+    private SpriteRenderer spr;
+    public Sprite ONspr;
+    public Sprite OFFspr;
+
+    void Awake()
+    {
+        spr = GetComponent<SpriteRenderer>();
+    }
     void Start()
     {
         //位置設定
@@ -17,6 +26,10 @@ public class Switch : MonoBehaviour
         transform.position = GridManager.Instance.GridToWorld(gridX, gridY);
 
         TurnManager.Instance.AddSwitch(this);
+    }
+    void Update()
+    {
+        ChangeSprite();    
     }
 
     //スイッチの状態チェック
@@ -44,6 +57,12 @@ public class Switch : MonoBehaviour
 
         isOn = OnTop;
 
+    }
+
+    void ChangeSprite()
+    {
+        if (isOn) spr.sprite = ONspr;
+        else spr.sprite = OFFspr;
     }
 
 }

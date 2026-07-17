@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fb3c9b3b9e8cfdf42b6df982422af0c8
+guid: 4f8aabc199b96294aba815911926a747
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -379217793338548737
-    second: HomeWall7_0
+      213: 7535830018690676834
+    second: FlowerBed2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HomeWall7_0
+      name: FlowerBed2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 100
-        height: 100
+        x: 19
+        y: 15
+        width: 58
+        height: 74
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ffd5c871d6fbcbaf0800000000000000
-      internalID: -379217793338548737
+      spriteID: 26878c7b975a49860800000000000000
+      internalID: 7535830018690676834
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HomeWall7_0: -379217793338548737
+      FlowerBed2_0: 7535830018690676834
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
