@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Video;
+using System.Collections;
 using System.Linq;
 
 public class TurnManager : MonoBehaviour
@@ -25,6 +25,9 @@ public class TurnManager : MonoBehaviour
     //スイッチ
     private List<Switch> switches = new List<Switch>();
     private List<Door> doors = new List<Door>();
+
+    //プレイヤーの死亡演出
+    private bool isDying = false;
 
     void Awake()
     {
@@ -69,12 +72,7 @@ public class TurnManager : MonoBehaviour
             //実行中に重なってもリセット
             if(enemy.gridX == player.gridX && enemy.gridY == player.gridY)
             {
-                //見た目管理
-                PlayHitEffects();
-                Player.Instance.DamageSE();
-                //情報管理
-                turnState = TurnState.Wait;
-                StageManager.Instance.CurrentStageReset();
+                TriggerPlayerDie();
                 return;
             }
         }
@@ -95,12 +93,8 @@ public class TurnManager : MonoBehaviour
         {
             //位置が同じならリセット
             if(enemy.gridX == player.gridX && enemy.gridY == player.gridY)
-            {                
-                //見た目管理
-                PlayHitEffects();
-                Player.Instance.DamageSE();
-                //情報管理
-                StageManager.Instance.CurrentStageReset();
+            {
+                TriggerPlayerDie();
                 return;
             }
         }
@@ -145,12 +139,7 @@ public class TurnManager : MonoBehaviour
         //プレイヤーが腐敗マスにいるか
         if(cell != null && (cell.type & GridManager.GridType.Decay) != 0)
         {
-            //見た目管理
-            PlayHitEffects();
-            Player.Instance.DamageSE();
-            //情報管理
-            turnState = TurnState.Wait;
-            StageManager.Instance.CurrentStageReset();
+            TriggerPlayerDie();
             return;
         }
         //敵が腐敗マスにいるか
@@ -163,7 +152,27 @@ public class TurnManager : MonoBehaviour
     }
     //クリアチェック
     void CheckClear() { StageManager.Instance.CheckCurrentStageClear(); }
+    //プレイヤーの死亡処理
+    void TriggerPlayerDie()
+    {
+        if (isDying) return;
+        isDying = true;
 
+        PlayHitEffects();
+        Player.Instance.DamageSE();
+        Player.Instance.PlayerDieVisual();
+        StartCoroutine(DelayedReset());
+
+    }
+    IEnumerator DelayedReset()
+    {
+        //死亡演出中の待機時間
+        yield return new WaitForSeconds(0.3f);
+
+        turnState = TurnState.Wait;
+        StageManager.Instance.CurrentStageReset();
+        isDying = false;
+    }
     void PlayHitEffects() { CameraManager.Instance.Shake();}
 
 }

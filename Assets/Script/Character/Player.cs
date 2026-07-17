@@ -164,20 +164,7 @@ public class Player : MonoBehaviour
     //リセット
     public void PlayerReset()
     {
-        //アニメーション関連
-        if (isResetting) return;
-        isResetting = true;
-
-        if(animator != null)
-        {
-            animator.enabled = true;
-            animator.SetTrigger("Die");
-        }
-        else
-        {
-            if (dieSpr != null) spr.sprite = dieSpr;
-            FinishPlayerReset();
-        }
+        FinishPlayerReset();
     }
     public void FinishPlayerReset()
     {
@@ -268,5 +255,22 @@ public class Player : MonoBehaviour
     public CharacterVisual GetVisual() { return visual; }
     //敵衝突時のダメージ再生
     public void DamageSE() { audioSource.PlayOneShot(damageClip); }
+    //死亡の見た目演出のみ
+    public void PlayerDieVisual()
+    {
+        if (isResetting) return;
+
+        isResetting = true;
+        if(animator != null)
+        {
+            animator.enabled = true;
+            animator.SetTrigger("Die");
+        }
+        else
+        {
+            if (dieSpr != null) spr.sprite = dieSpr;
+        }
+
+    }
 
 }
