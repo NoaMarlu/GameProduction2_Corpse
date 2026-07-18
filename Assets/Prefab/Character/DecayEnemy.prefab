@@ -59,7 +59,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 5d292143500e33f4996bd0d5b054ae2f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,8 +82,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 50
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.6981132, g: 0.15776375, b: 0.08298323, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 661a595fbfdaad1429ea1c9906b796d4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -111,3 +111,5 @@ MonoBehaviour:
   moveMode: 1
   corpseMode: -1
   decayPrefab: {fileID: 6589951165396987466, guid: 5a8fe67b94be206429b99969386d5990, type: 3}
+  dieSpr: {fileID: 0}
+  damageClip: {fileID: 0}
