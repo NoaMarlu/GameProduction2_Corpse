@@ -40,6 +40,8 @@ public class Enemy : MonoBehaviour
     //腐敗用
     public GameObject decayPrefab;//腐敗しているマス用のプレハブ
     private List<GameObject> decayObjects = new List<GameObject>();
+    private int corpseGridX;//遺体化した座標
+    private int corpseGridY;
 
     //スプライト用
     private CharacterVisual visual;
@@ -161,6 +163,9 @@ public class Enemy : MonoBehaviour
         if (isCorpse) return;
         //遺体フラグ
         isCorpse = true;
+        //遺体化した位置の記録（腐敗用）
+        corpseGridX = gridX;
+        corpseGridY = gridY;
         //移動停止
         TurnManager.Instance.RemoveEnemy(this);
         //SE
@@ -227,8 +232,8 @@ public class Enemy : MonoBehaviour
         {
             for(int dy = -1;dy <= 1; dy++)
             {
-                int targetX = initGridX + dx;
-                int targetY = initGridY + dy;
+                int targetX = corpseGridX + dx;
+                int targetY = corpseGridY + dy;
                 var cell = GridManager.Instance.GetCell(targetX, targetY);
                 if(cell != null)cell.type &= ~GridManager.GridType.Decay;
             }
