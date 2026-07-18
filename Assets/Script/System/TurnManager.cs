@@ -118,6 +118,7 @@ public class TurnManager : MonoBehaviour
         turnState = TurnState.Wait;
         //打ってから状態が変わった可能性があるため
         CheckSwitchDoor();
+        CheckDecay();
     }
 
     /*スイッチ関連*/
