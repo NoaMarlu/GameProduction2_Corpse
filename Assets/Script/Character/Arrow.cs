@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine.UIElements;
 
 public class Arrow : MonoBehaviour
 {
@@ -99,10 +97,17 @@ public class Arrow : MonoBehaviour
     //引数のマスにエネミーがいるか検索
     private Enemy FindEnemy(int x,int y)
     {
+        Stage activeStage = StageManager.Instance.GetCurrentStage();
+        //ステージにいなかったら当たらない
+        if (activeStage == null) return null;
+
         Enemy[] allEnemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
         foreach(var enemy in allEnemies)
         {
-            if (enemy.gridX == x && enemy.gridY == y) return enemy;
+            if(enemy.gridX == x && enemy.gridY == y)
+            {
+                if (enemy.currentStage == activeStage) return enemy;
+            }
         }
         return null;
     }

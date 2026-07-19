@@ -7,8 +7,8 @@ using UnityEngine.Video;
 public class StageManager : MonoBehaviour 
 {
     public static StageManager Instance { get; private set; }
-
     private Stage currentStage;
+    private List<Stage> allStages  = new List<Stage>();
 
     //SE
     private AudioSource audioSource;
@@ -74,5 +74,32 @@ public class StageManager : MonoBehaviour
     }
     //ステージクリア時に呼び出し
     public void PlayClearSE() { audioSource.PlayOneShot(clearClip); }
+    //ステージ追加
+    public void AddStage(Stage stage)
+    {
+        if (!allStages.Contains(stage))allStages.Add(stage);
+    }
+    //プレイヤーがどのステージか判定
+    public void CheckStageGridPos(Vector2Int gridPos,Player player)
+    {
+        foreach(var stage in allStages)
+        {
+            if (stage.ContainsGridPos(gridPos))
+            {
+                isPlayerStage(stage, player);
+                return;
+            }
+        }
+        //どこにもいなかったら
+        if(currentStage != null)
+        {
+            if (currentStage.isCleared) return;
+            currentStage.ExitStageAndNoClear();
+            currentStage.InactiveStage();
+            currentStage = null;
+        }
+    }
+    //現在アクティブなステージを返す
+    public Stage GetCurrentStage() { return currentStage; }
 
 }

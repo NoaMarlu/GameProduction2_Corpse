@@ -109,7 +109,7 @@ MonoBehaviour:
   gridX: 0
   gridY: 0
   lastDirection: {x: 0, y: 0}
-  level: 0
+  level: 1
   moveMode: 1
   corpseMode: -1
   decayPrefab: {fileID: 6589951165396987466, guid: 5a8fe67b94be206429b99969386d5990, type: 3}

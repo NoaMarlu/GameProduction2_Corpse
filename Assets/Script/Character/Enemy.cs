@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     public int gridX;
     public int gridY;
     public Vector2Int lastDirection;
+    private Vector2Int decideDirection;
+    public Stage currentStage;
 
     public int level = 0;//レベルが高いと実行が早い
 
@@ -87,69 +89,6 @@ public class Enemy : MonoBehaviour
     }
     //位置変更
     void SnapToGrid(){  transform.position  =GridManager.Instance.GridToWorld(gridX, gridY); }
-    //移動処理
-    public void EnemyMove()
-    {
-        //移動モードにより動作を変更
-        switch (moveMode) 
-        {
-            case MoveMode.None:   /*処理なし*/    break;
-            case MoveMode.RightToLeft:  RightToLeftFunc();  break;
-            case MoveMode.UpToDown:   UpToDownFunc();   break;
-        }
-
-        //方向にあわせてスプライトを変更
-        if (lastDirection.x != 0) GetComponent<SpriteRenderer>().flipX = lastDirection.x > 0;
-
-        //移動アニメーション
-        visual?.PlayMoveStretch(lastDirection);
-    }
-
-    //移動系関数
-    void RightToLeftFunc()
-    {
-        //ターゲット検索
-        int targetX = gridX + lastDirection.x;
-        int targetY = gridY + lastDirection.y;
-        var targetCell = GridManager.Instance.GetCell(targetX, targetY);
-
-        //進めないなら方向転換
-        if(targetCell == null || !targetCell.isWalk)
-        {
-            lastDirection = new Vector2Int(-lastDirection.x, 0);
-            //ターゲット再検索
-            targetX = gridX + lastDirection.x;
-            targetY = gridY + lastDirection.y;
-            targetCell = GridManager.Instance.GetCell(targetX, targetY);
-            //再検索後も進めないならreturn
-            if(targetCell == null || !targetCell.isWalk)return;
-        }
-        gridX = targetX;
-        gridY = targetY;
-        SnapToGrid();
-    }
-    void UpToDownFunc()
-    {
-        //ターゲット検索
-        int targetX = gridX + lastDirection.x;
-        int targetY = gridY + lastDirection.y;
-        var targetCell = GridManager.Instance.GetCell(targetX, targetY);
-
-        //進めないなら方向転換
-        if (targetCell == null || !targetCell.isWalk)
-        {
-            lastDirection = new Vector2Int(0,-lastDirection.y);
-            //ターゲット再検索
-            targetX = gridX + lastDirection.x;
-            targetY = gridY + lastDirection.y;
-            targetCell = GridManager.Instance.GetCell(targetX, targetY);
-            //再検索後も進めないならreturn
-            if (targetCell == null || !targetCell.isWalk) return;
-        }
-        gridX = targetX;
-        gridY = targetY;
-        SnapToGrid();
-    }
     //矢の衝突時に呼ぶ
     public void HitArrow()
     {
@@ -289,5 +228,56 @@ public class Enemy : MonoBehaviour
     }
     //遺体判定を返す
     public bool IsCorpse() { return isCorpse;  }
+    //進むますにエネミーがいるか判定
+    bool IsOtherEnemy(int x,int y)
+    {
+        foreach(var enemy in TurnManager.Instance.GetEnemies())
+        {
+            if (enemy == this) continue;
+            if (enemy.gridX == x & enemy.gridY == y) return true;
+        }
+        return false;
+    }
+    //移動先の計算のみ
+    public Vector2Int DecideMove()
+    {
+        Vector2Int dir = lastDirection;
+        int targetX = gridX + dir.x;
+        int targetY = gridY + dir.y;
+        var targetCell = GridManager.Instance.GetCell(targetX, targetY);
+
+        bool blocked = (targetCell == null || !targetCell.isWalk || IsOtherEnemy(targetX,targetY));
+
+        if (blocked)
+        {
+            if (moveMode == MoveMode.RightToLeft) dir = new Vector2Int(-dir.x, 0);
+            else if (moveMode == MoveMode.UpToDown) dir = new Vector2Int(0, -dir.y);
+
+            targetX = gridX + dir.x;
+            targetY = gridY + dir.y;
+            targetCell = GridManager.Instance.GetCell(targetX,targetY);
+
+            blocked = (targetCell == null || !targetCell.isWalk || IsOtherEnemy(targetX, targetY));
+            if (blocked){
+                decideDirection = lastDirection;
+                return new Vector2Int(gridX, gridY); 
+            }
+        }
+        decideDirection = dir;
+        return new Vector2Int(targetX,targetY);
+    }
+    //移動を確定
+    public void ConfilmMove(Vector2Int confirmPos)
+    {
+        if (confirmPos.x == gridX && confirmPos.y == gridY) return;
+        lastDirection = decideDirection;
+        gridX = confirmPos.x; 
+        gridY = confirmPos.y;
+        SnapToGrid();
+
+        if (lastDirection.x != 0) spr.flipX = lastDirection.x > 0;
+        visual?.PlayMoveStretch(lastDirection);
+    }
+    public void ConfilmDirectionOnly() { lastDirection = decideDirection; }
 
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using UnityEngine.Video;
+using System.Data;
 
 public class TurnManager : MonoBehaviour
 {
@@ -64,17 +66,44 @@ public class TurnManager : MonoBehaviour
 
         //移動方向を設定
         player.SetMoveDirection(direction);
-        //level順にソートして実行
-        foreach(var enemy in enemies.OrderByDescending(e => e.level))
+        //移動先のチェック
+        Vector2Int nextPos = new Vector2Int(player.gridX + direction.x, player.gridY + direction.y);
+        StageManager.Instance.CheckStageGridPos(nextPos,player);
+        //レベル順の敵
+        var orderEnemies = enemies.OrderByDescending(e => e.level).ToList();
+        //全員の移動先計算
+        var decidePosition = new Dictionary<Enemy,Vector2Int>();
+        foreach (var enemy in orderEnemies) decidePosition[enemy] = enemy.DecideMove();
+        //移動先を確定
+        var confilmPosition = new HashSet<Vector2Int>();
+        foreach(var enemy in orderEnemies)
         {
-            enemy.EnemyMove();
-            //実行中に重なってもリセット
+            if (decidePosition[enemy].x == enemy.gridX && decidePosition[enemy].y == enemy.gridY)confilmPosition.Add(new Vector2Int(enemy.gridX,enemy.gridY));
+        }
+
+        foreach(var enemy in orderEnemies)
+        {
+            Vector2Int decide = decidePosition[enemy];
+
+            //その場にいるなら何もしない
+            if (decide.x == enemy.gridX && decide.y == enemy.gridY) continue;
+            //既に埋まってるなら方向転換
+            if (confilmPosition.Contains(decide))
+            {
+                enemy.ConfilmDirectionOnly();
+                continue;
+            }
+            //空いてるなら移動を確定
+            enemy.ConfilmMove(decide);
+            confilmPosition.Add(decide);
+            //衝突チェック
             if(enemy.gridX == player.gridX && enemy.gridY == player.gridY)
             {
                 TriggerPlayerDie();
                 return;
             }
         }
+
         player.PlayerMove();
 
         //移動後にチェック

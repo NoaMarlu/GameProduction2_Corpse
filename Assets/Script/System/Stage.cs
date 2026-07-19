@@ -26,11 +26,13 @@ public class Stage : MonoBehaviour
     private Vector2Int clearGridPos;
     private Vector2Int initGridPos;
     private Vector3 cameraPos;
+    public Collider2D triggerCollider;
 
     void Awake()
     {
         //エネミーはステージの子オブジェクトにする
         stageEnemies.AddRange(GetComponentsInChildren<Enemy>());
+        foreach (Enemy enemy in stageEnemies) enemy.currentStage = this;
     }
     void Start()
     {
@@ -38,6 +40,7 @@ public class Stage : MonoBehaviour
         if (clearMarker != null) clearGridPos = GridManager.Instance.WorldToGrid(clearMarker.transform.position);
         if (initMarker != null) initGridPos = GridManager.Instance.WorldToGrid(initMarker.transform.position);
         if (cameraMarker != null) cameraPos = cameraMarker.transform.position;
+        StageManager.Instance.AddStage(this);
     }
 
     //ステージをアクティブにする
@@ -111,6 +114,11 @@ public class Stage : MonoBehaviour
     {
         //処理なし
     }
-
+    public bool ContainsGridPos(Vector2Int gridPos)
+    {
+        if (triggerCollider == null) return false;
+        Vector3 worldPos = GridManager.Instance.GridToWorld(gridPos.x, gridPos.y);
+        return triggerCollider.OverlapPoint(worldPos);
+    }
 
 }
