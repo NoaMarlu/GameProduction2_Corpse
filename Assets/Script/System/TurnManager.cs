@@ -71,31 +71,11 @@ public class TurnManager : MonoBehaviour
         StageManager.Instance.CheckStageGridPos(nextPos,player);
         //レベル順の敵
         var orderEnemies = enemies.OrderByDescending(e => e.level).ToList();
-        //全員の移動先計算
-        var decidePosition = new Dictionary<Enemy,Vector2Int>();
-        foreach (var enemy in orderEnemies) decidePosition[enemy] = enemy.DecideMove();
-        //移動先を確定
-        var confilmPosition = new HashSet<Vector2Int>();
-        foreach(var enemy in orderEnemies)
-        {
-            if (decidePosition[enemy].x == enemy.gridX && decidePosition[enemy].y == enemy.gridY)confilmPosition.Add(new Vector2Int(enemy.gridX,enemy.gridY));
-        }
 
         foreach(var enemy in orderEnemies)
         {
-            Vector2Int decide = decidePosition[enemy];
-
-            //その場にいるなら何もしない
-            if (decide.x == enemy.gridX && decide.y == enemy.gridY) continue;
-            //既に埋まってるなら方向転換
-            if (confilmPosition.Contains(decide))
-            {
-                enemy.ConfilmDirectionOnly();
-                continue;
-            }
-            //空いてるなら移動を確定
+            Vector2Int decide = enemy.DecideMove();
             enemy.ConfilmMove(decide);
-            confilmPosition.Add(decide);
             //衝突チェック
             if(enemy.gridX == player.gridX && enemy.gridY == player.gridY)
             {
