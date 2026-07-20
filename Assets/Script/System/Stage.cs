@@ -120,5 +120,7 @@ public class Stage : MonoBehaviour
         Vector3 worldPos = GridManager.Instance.GridToWorld(gridPos.x, gridPos.y);
         return triggerCollider.OverlapPoint(worldPos);
     }
+    //クリアマスを返す
+    public bool ClearGrid(Vector2Int gridPos) { return gridPos.x == clearGridPos.x && gridPos.y == clearGridPos.y; }
 
 }

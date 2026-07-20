@@ -101,5 +101,11 @@ public class StageManager : MonoBehaviour
     }
     //現在アクティブなステージを返す
     public Stage GetCurrentStage() { return currentStage; }
+    //クリアマスにいるか判定
+    public bool IsClearGridCurrentStage(Vector2Int gridPos)
+    {
+        if (currentStage == null) return false;
+        return currentStage.ClearGrid(gridPos);
+    }
 
 }

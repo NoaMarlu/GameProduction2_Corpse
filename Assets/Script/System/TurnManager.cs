@@ -68,7 +68,7 @@ public class TurnManager : MonoBehaviour
         player.SetMoveDirection(direction);
         //移動先のチェック
         Vector2Int nextPos = new Vector2Int(player.gridX + direction.x, player.gridY + direction.y);
-        StageManager.Instance.CheckStageGridPos(nextPos,player);
+        if(!StageManager.Instance.IsClearGridCurrentStage(nextPos))StageManager.Instance.CheckStageGridPos(nextPos,player);
         //レベル順の敵
         var orderEnemies = enemies.OrderByDescending(e => e.level).ToList();
 
@@ -92,7 +92,6 @@ public class TurnManager : MonoBehaviour
         CheckSwitchDoor();
         CheckPlayerTrapped();
         CheckClear();
-
         turnState = TurnState.Wait;
     }
     //敵とプレイヤーが同じマスにいるかどうか
