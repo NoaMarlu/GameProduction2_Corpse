@@ -276,6 +276,7 @@ public class Enemy : MonoBehaviour
         SnapToGrid();
 
         if (lastDirection.x != 0) spr.flipX = lastDirection.x > 0;
+        if (lastDirection.y != 0) spr.flipY = lastDirection.y < 0;
         visual?.PlayMoveStretch(lastDirection);
     }
     public void ConfilmDirectionOnly() { lastDirection = decideDirection; }
