@@ -56,6 +56,10 @@ public class Enemy : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip damageClip;
 
+    //縦移動エネミーのスプライト処理変更
+    public int upToDownMode = 0;
+    //0だとスプライトを上下反転、1だとスプライトを反転せずアニメーションを変更
+
     void Awake()
     {
         initSpr = GetComponent<SpriteRenderer>().sprite;
@@ -276,10 +280,23 @@ public class Enemy : MonoBehaviour
         SnapToGrid();
 
         if (lastDirection.x != 0) spr.flipX = lastDirection.x > 0;
-        if (lastDirection.y != 0) spr.flipY = lastDirection.y < 0;
+        //縦移動エネミーのみ
+        if (lastDirection.y != 0)
+        {
+            if (moveMode == MoveMode.UpToDown && upToDownMode == 1) PlayUpDownAnime(lastDirection.y);
+            else spr.flipY = lastDirection.y < 0;
+        }
         visual?.PlayMoveStretch(lastDirection);
     }
     public void ConfilmDirectionOnly() { lastDirection = decideDirection; }
+    //縦移動アニメーションのトリガー変更
+    void PlayUpDownAnime(int dirY)
+    {
+        if (animator == null) return;
+        //方向でトリガー管理
+        if (dirY > 0) animator.SetTrigger("Up");
+        else animator.SetTrigger("Down");
+    }
 
 
 }
