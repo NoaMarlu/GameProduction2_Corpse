@@ -7,7 +7,7 @@ using UnityEngine.Video;
 public class StageManager : MonoBehaviour 
 {
     public static StageManager Instance { get; private set; }
-    private Stage currentStage;
+    public Stage currentStage;
     private List<Stage> allStages  = new List<Stage>();
 
     //SE
@@ -82,7 +82,14 @@ public class StageManager : MonoBehaviour
     //プレイヤーがどのステージか判定
     public void CheckStageGridPos(Vector2Int gridPos,Player player)
     {
-        foreach(var stage in allStages)
+
+        //クリアマスがトリガー外にいたらnull
+        if (currentStage != null &&currentStage.ClearGrid(gridPos))
+        {
+            currentStage = null;
+        }
+
+        foreach (var stage in allStages)
         {
             if (stage.ContainsGridPos(gridPos))
             {
@@ -90,6 +97,7 @@ public class StageManager : MonoBehaviour
                 return;
             }
         }
+
         //どこにもいなかったら
         if(currentStage != null)
         {

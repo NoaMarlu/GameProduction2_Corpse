@@ -68,7 +68,7 @@ public class TurnManager : MonoBehaviour
         player.SetMoveDirection(direction);
         //移動先のチェック
         Vector2Int nextPos = new Vector2Int(player.gridX + direction.x, player.gridY + direction.y);
-        if(!StageManager.Instance.IsClearGridCurrentStage(nextPos))StageManager.Instance.CheckStageGridPos(nextPos,player);
+        StageManager.Instance.CheckStageGridPos(nextPos,player);
         //レベル順の敵
         var orderEnemies = enemies.OrderByDescending(e => e.level).ToList();
 
