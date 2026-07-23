@@ -20845,6 +20845,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
   currentStage: {fileID: 0}
   clearClip: {fileID: 8300000, guid: 390874c27dbe28c4d920467aa785e3e7, type: 3}
+  clearEffect: {fileID: 4419621500186329254, guid: 05022e00a0d6cac4bbe1a827ec445630, type: 3}
 --- !u!114 &1968715653
 MonoBehaviour:
   m_ObjectHideFlags: 0

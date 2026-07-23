@@ -272,5 +272,11 @@ public class Player : MonoBehaviour
         }
 
     }
+    //クリア時のアニメーション
+    public void PlayClearAnime()
+    {
+        if (!animator.enabled) return;
+        animator.SetTrigger("Clear");
+    }
 
 }

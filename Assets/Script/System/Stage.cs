@@ -105,6 +105,8 @@ public class Stage : MonoBehaviour
         {
             isCleared = true;
             StageManager.Instance.PlayClearSE();
+            StageManager.Instance.PlayClearEffect();
+            //Player.Instance.PlayClearAnime();
             OnClear();
         }
     }

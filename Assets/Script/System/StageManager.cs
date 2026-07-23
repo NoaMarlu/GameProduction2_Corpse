@@ -10,9 +10,10 @@ public class StageManager : MonoBehaviour
     public Stage currentStage;
     private List<Stage> allStages  = new List<Stage>();
 
-    //SE
+    //クリア演出
     private AudioSource audioSource;
     public AudioClip clearClip;
+    public GameObject clearEffect;
 
     void Awake()
     {
@@ -74,6 +75,8 @@ public class StageManager : MonoBehaviour
     }
     //ステージクリア時に呼び出し
     public void PlayClearSE() { audioSource.PlayOneShot(clearClip); }
+    //ステージクリア時にエフェクト生成
+    public void PlayClearEffect() { Instantiate(clearEffect, Player.Instance.transform.position, Quaternion.identity); }
     //ステージ追加
     public void AddStage(Stage stage)
     {
