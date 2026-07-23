@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
     //ˆÚ“®“ü—Íˆ—
     public void PlayerInput()
     {
+        if (TurnManager.Instance.turnState != TurnManager.TurnState.Wait) return;
         if (isResetting) return;
         Vector2Int dir = Vector2Int.zero;
 
@@ -186,6 +187,7 @@ public class Player : MonoBehaviour
     //–î‚Ì”­Ë
     public void ArrowInput()
     {
+        if (TurnManager.Instance.turnState != TurnManager.TurnState.Wait) return;
         if (isResetting) return;
         Vector2Int dir = Vector2Int.zero;
 

@@ -1,8 +1,9 @@
 using NUnit.Framework;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Video;
+using static TurnManager;
 
 public class StageManager : MonoBehaviour 
 {
@@ -70,7 +71,11 @@ public class StageManager : MonoBehaviour
     //現在のステージがクリアしているかチェック
     public void CheckCurrentStageClear()
     {
-        if (currentStage == null) return;
+        if (currentStage == null) 
+        {
+            TurnManager.Instance.turnState = TurnState.Wait;
+            return; 
+        }
         currentStage.CheckClear();
     }
     //ステージクリア時に呼び出し

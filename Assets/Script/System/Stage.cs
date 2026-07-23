@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static TurnManager;
 
 public class Stage : MonoBehaviour
 {
@@ -93,8 +94,16 @@ public class Stage : MonoBehaviour
     //クリアしているかチェック
     public void CheckClear()
     {
-        if (isCleared) return;
-        if (stagePlayer == null) return;
+        if (isCleared)
+        {
+            TurnManager.Instance.turnState = TurnState.Wait;
+            return; 
+        }
+        if (stagePlayer == null)
+        {
+            TurnManager.Instance.turnState = TurnState.Wait;
+            return; 
+        }
 
         //モンスターが全て遺体かチェック
         bool allEnemiesDefeated = stageEnemies.All(e => e.IsCorpse());
@@ -104,16 +113,20 @@ public class Stage : MonoBehaviour
         if(allEnemiesDefeated && onClearGrid)
         {
             isCleared = true;
-            StageManager.Instance.PlayClearSE();
-            StageManager.Instance.PlayClearEffect();
-            //Player.Instance.PlayClearAnime();
             OnClear();
+        }
+        else
+        {
+            TurnManager.Instance.turnState = TurnState.Wait;
         }
     }
     //クリア時処理
     void OnClear()
     {
-        //処理なし
+        //Player.Instance.PlayClearAnime();
+        TurnManager.Instance.ChangeTurnState(TurnManager.TurnState.StageClear);
+        StageManager.Instance.PlayClearSE();
+        StageManager.Instance.PlayClearEffect();
     }
     public bool ContainsGridPos(Vector2Int gridPos)
     {

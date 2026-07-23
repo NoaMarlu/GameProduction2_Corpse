@@ -15,6 +15,7 @@ public class TurnManager : MonoBehaviour
         Wait,   //プレイヤーの入力待機
         Action, //実行処理
         Arrow,//矢の発射中
+        StageClear,//ステージクリア状態
     }
     public TurnState turnState = TurnState.Wait;
 
@@ -92,7 +93,6 @@ public class TurnManager : MonoBehaviour
         CheckSwitchDoor();
         CheckPlayerTrapped();
         CheckClear();
-        turnState = TurnState.Wait;
     }
     //敵とプレイヤーが同じマスにいるかどうか
     void CheckPlayerEnemyCollision()
@@ -189,5 +189,7 @@ public class TurnManager : MonoBehaviour
         var cell = GridManager.Instance.GetCell(player.gridX, player.gridY);
         if (cell != null && !cell.isWalk) { TriggerPlayerDie(); }
     }
+    //trunStateの変更
+    public void ChangeTurnState(TurnState state){ turnState = state; }
 
 }
