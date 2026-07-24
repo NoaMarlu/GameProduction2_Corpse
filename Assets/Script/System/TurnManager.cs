@@ -92,6 +92,7 @@ public class TurnManager : MonoBehaviour
         CheckDecay();
         CheckSwitchDoor();
         CheckPlayerTrapped();
+        CheckEnemyTrapped();
         CheckClear();
     }
     //敵とプレイヤーが同じマスにいるかどうか
@@ -188,6 +189,15 @@ public class TurnManager : MonoBehaviour
     {
         var cell = GridManager.Instance.GetCell(player.gridX, player.gridY);
         if (cell != null && !cell.isWalk) { TriggerPlayerDie(); }
+    }
+    //敵の位置が壁になってないか確認
+    void CheckEnemyTrapped()
+    {
+        foreach (var enemy in enemies.ToList())
+        {
+            var cell = GridManager.Instance.GetCell(enemy.gridX, enemy.gridY);
+            if (cell != null && !cell.isWalk) enemy.HitArrow();
+        }
     }
     //trunStateの変更
     public void ChangeTurnState(TurnState state){ turnState = state; }

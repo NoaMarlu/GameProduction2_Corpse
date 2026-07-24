@@ -298,5 +298,4 @@ public class Enemy : MonoBehaviour
         else animator.SetTrigger("Down");
     }
 
-
 }
