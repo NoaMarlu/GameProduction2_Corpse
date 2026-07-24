@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 4810e8dd73474f24f96e23d3040440bf
+guid: 7d34b101cfed26444a1a1e88261cbd3f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 150573614939571588
-    second: Donut2_0
-  - first:
-      213: -6083569104225856271
-    second: Donut2_1
+      213: 4974930689745941605
+    second: DishSoap_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Donut2_0
+      name: DishSoap_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 33
-        width: 66
-        height: 36
+        x: 29
+        y: 3
+        width: 42
+        height: 94
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 485050fa7e1f61200800000000000000
-      internalID: 150573614939571588
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Donut2_1
-      rect:
-        serializedVersion: 2
-        x: 63
-        y: 9
-        width: 34
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1f49310c122d29ba0800000000000000
-      internalID: -6083569104225856271
+      spriteID: 564fe70aa118a0540800000000000000
+      internalID: 4974930689745941605
       vertices: []
       indices: 
       edges: []
@@ -160,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Donut2_0: 150573614939571588
-      Donut2_1: -6083569104225856271
+      DishSoap_0: 4974930689745941605
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
