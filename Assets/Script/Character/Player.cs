@@ -280,5 +280,14 @@ public class Player : MonoBehaviour
         if (!animator.enabled) return;
         animator.SetTrigger("Clear");
     }
-
+    //アニメーション用トリガー変更関数
+    private void ChangeAnimeNormalTrigger()
+    {
+        Player.Instance.ChangeAnimeTrigger("Normal");
+    }
+    //アニメーショントリガーの変更
+    public void ChangeAnimeTrigger(string trigger)
+    {
+        animator.SetTrigger(trigger);
+    }
 }

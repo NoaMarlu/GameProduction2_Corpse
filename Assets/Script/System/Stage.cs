@@ -123,7 +123,7 @@ public class Stage : MonoBehaviour
     //ƒNƒŠƒAˆ—
     void OnClear()
     {
-        //Player.Instance.PlayClearAnime();
+        Player.Instance.PlayClearAnime();
         TurnManager.Instance.ChangeTurnState(TurnManager.TurnState.StageClear);
         StageManager.Instance.PlayClearSE();
         StageManager.Instance.PlayClearEffect();
