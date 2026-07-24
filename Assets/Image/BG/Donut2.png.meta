@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: dfbb365c8612336459a72c6e809af21f
+guid: 4810e8dd73474f24f96e23d3040440bf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6987336881924685435
-    second: SoccerBall_0
+      213: 150573614939571588
+    second: Donut2_0
+  - first:
+      213: -6083569104225856271
+    second: Donut2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 150
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SoccerBall_0
+      name: Donut2_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 3
-        width: 90
-        height: 92
+        x: 17
+        y: 33
+        width: 66
+        height: 36
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 581c4ea502ef70f90800000000000000
-      internalID: -6987336881924685435
+      spriteID: 485050fa7e1f61200800000000000000
+      internalID: 150573614939571588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Donut2_1
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 9
+        width: 34
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f49310c122d29ba0800000000000000
+      internalID: -6083569104225856271
       vertices: []
       indices: 
       edges: []
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SoccerBall_0: -6987336881924685435
+      Donut2_0: 150573614939571588
+      Donut2_1: -6083569104225856271
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
