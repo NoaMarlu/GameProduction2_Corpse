@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 51
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: b112d27a1b64c3343bb933c098d628c2, type: 3}
+  m_Sprite: {fileID: -784878868, guid: 264e4e488bee4444588d44386e19b72a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   decayPrefab: {fileID: 0}
   dieSpr: {fileID: 21300000, guid: af2764de0ce03f141a1e0053ca2f5388, type: 3}
   damageClip: {fileID: 8300000, guid: 4cc31f1baf9db044b9298037e8f2cf1b, type: 3}
-  upToDownMode: 0
+  upToDownMode: 1
 --- !u!114 &2442083889237159864
 MonoBehaviour:
   m_ObjectHideFlags: 0
