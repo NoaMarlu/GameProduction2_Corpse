@@ -23198,10 +23198,6 @@ PrefabInstance:
       propertyPath: level
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 6706135200636788677, guid: 16776847bd1b1ee428825a789dbfb76a, type: 3}
-      propertyPath: dieSpr
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7997318176361525368, guid: 16776847bd1b1ee428825a789dbfb76a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.5
@@ -24007,11 +24003,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4208973602979761177, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.92
+      value: 21.57
       objectReference: {fileID: 0}
     - target: {fileID: 4208973602979761177, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.85
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 4208973602979761177, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
       propertyPath: m_LocalPosition.z
