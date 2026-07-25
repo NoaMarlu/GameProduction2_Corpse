@@ -106,7 +106,7 @@ public class Stage : MonoBehaviour
         }
 
         //モンスターが全て遺体かチェック
-        bool allEnemiesDefeated = stageEnemies.All(e => e.IsCorpse());
+        bool allEnemiesDefeated = IsAllEnemyDefeated();
         //指定グリッドを踏んでいる状態でモンスターを討伐していればクリア
         bool onClearGrid = stagePlayer.gridX == clearGridPos.x && stagePlayer.gridY == clearGridPos.y;
 
@@ -136,5 +136,7 @@ public class Stage : MonoBehaviour
     }
     //クリアマスを返す
     public bool ClearGrid(Vector2Int gridPos) { return gridPos.x == clearGridPos.x && gridPos.y == clearGridPos.y; }
+    //エネミーが全部遺体か確認
+    public bool IsAllEnemyDefeated() { return stageEnemies.All(e => e.IsCorpse()); }
 
 }

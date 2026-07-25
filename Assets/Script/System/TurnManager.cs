@@ -31,6 +31,9 @@ public class TurnManager : MonoBehaviour
     //プレイヤーの死亡演出
     private bool isDying = false;
 
+    //クリアブロック
+    private List<ClearBlock> clearBlocks = new List<ClearBlock>();
+
     void Awake()
     {
         //シングルトン化
@@ -93,6 +96,7 @@ public class TurnManager : MonoBehaviour
         CheckSwitchDoor();
         CheckPlayerTrapped();
         CheckEnemyTrapped();
+        CheckClearBlock();
         CheckClear();
     }
     //敵とプレイヤーが同じマスにいるかどうか
@@ -128,6 +132,7 @@ public class TurnManager : MonoBehaviour
         //打ってから状態が変わった可能性があるため
         CheckSwitchDoor();
         CheckDecay();
+        CheckClearBlock();
     }
 
     /*スイッチ関連*/
@@ -201,5 +206,9 @@ public class TurnManager : MonoBehaviour
     }
     //trunStateの変更
     public void ChangeTurnState(TurnState state){ turnState = state; }
+    //クリアブロックの追加
+    public void AddClearBlock(ClearBlock block) { if (!clearBlocks.Contains(block)) clearBlocks.Add(block); }
+    //全クリアブロックの確認
+    void CheckClearBlock() { foreach (var block in clearBlocks) block.CheckBlock(); }
 
 }
