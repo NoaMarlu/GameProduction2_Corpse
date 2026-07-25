@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
         int targetY = gridY + direction.y;
         Cell targetCell = GridManager.Instance.GetCell(targetX, targetY);
 
-        if (targetCell == null || !targetCell.isWalk) return false;
+        if (targetCell == null || !targetCell.isWalk){ MoveCancel(targetCell,direction); return false; }
         return true;
     }
     //移動方向の保存
@@ -130,7 +130,7 @@ public class Player : MonoBehaviour
         var targetCell = GridManager.Instance.GetCell(targetX, targetY);
         if (targetCell == null || !targetCell.isWalk)
         {
-            MoveCancel(targetCell);
+            MoveCancel(targetCell,lastDirection);
             return;
         }
 
@@ -150,10 +150,13 @@ public class Player : MonoBehaviour
 
     }
     //エネミー実行後に移動をキャンセルする場合
-    private void MoveCancel(GridManager.Cell cancelCell)
+    private void MoveCancel(GridManager.Cell cancelCell,Vector2Int dir)
     {
         //ダメージ処理などの分岐は後で書く
-        Debug.Log("移動がキャンセルされました");
+        //ClearBlockがあるかチェック
+        int targetX = gridX + dir.x;
+        int targetY = gridY + dir.y;
+        TurnManager.Instance.BlockedMove(targetX, targetY);
     }
     //位置を綺麗に修正
     void SetPos()

@@ -210,5 +210,16 @@ public class TurnManager : MonoBehaviour
     public void AddClearBlock(ClearBlock block) { if (!clearBlocks.Contains(block)) clearBlocks.Add(block); }
     //全クリアブロックの確認
     void CheckClearBlock() { foreach (var block in clearBlocks) block.CheckBlock(); }
+    public void BlockedMove(int x,int y)
+    {
+        foreach(var block in clearBlocks)
+        {
+            if (block.IsPosition(x, y))
+            {
+                block.PlayFlash();
+                return;
+            }
+        }
+    }
 
 }
