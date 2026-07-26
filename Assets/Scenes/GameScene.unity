@@ -35678,6 +35678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e4feb1fde42a44ab9cf8ee31901656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinManager
+  getCoinSE: {fileID: 8300000, guid: d9da659c0e3ed0749970983691e210bf, type: 3}
 --- !u!1 &1971522969
 GameObject:
   m_ObjectHideFlags: 0
