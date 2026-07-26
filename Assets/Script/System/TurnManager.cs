@@ -133,6 +133,8 @@ public class TurnManager : MonoBehaviour
         CheckSwitchDoor();
         CheckDecay();
         CheckClearBlock();
+        CheckDecay();
+        CheckDecay();
     }
 
     /*スイッチ関連*/
