@@ -52,8 +52,10 @@ public class Arrow : MonoBehaviour
             gridX = targetX;
             gridY = targetY;
 
-            //•Ç‚È‚ç”š”­
-            if (!targetCell.isWalk) break;
+            //ŠiŽq—p
+            bool blocksArrow = !targetCell.isWalk && targetCell.arrowBlock;
+            if (blocksArrow) break;
+
             //“G‚È‚ç‘Ò‚Â
             if(hitEnemy != null)
             {

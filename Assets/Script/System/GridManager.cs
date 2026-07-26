@@ -31,6 +31,7 @@ public class GridManager : MonoBehaviour
     {
         public int x, y;
         public bool isWalk = true;//•à‚¯‚éƒ}ƒX‚©‚Ì”»’è
+        public bool arrowBlock = false;//–î‚ðŽ~‚ß‚é‚©‚Ç‚¤‚©
         public GridType type = GridType.None;
         public Cell(int x, int y)
         {

@@ -125,7 +125,11 @@ public class Enemy : MonoBehaviour
     public void ApplyCorpseLogic()
     {
         var cell = GridManager.Instance.GetCell(gridX, gridY);
-        if (cell != null) cell.isWalk = false;
+        if (cell != null)
+        {
+            cell.isWalk = false;
+            cell.arrowBlock = true;
+        }
         CorpseEffect();
     }
     //遺体効果
@@ -208,6 +212,7 @@ public class Enemy : MonoBehaviour
         {
             var corpseCell = GridManager.Instance.GetCell(gridX, gridY);
             if (corpseCell != null) corpseCell.isWalk = true;
+            if (corpseCell != null) corpseCell.arrowBlock = false ;
             if (corpseCell != null) corpseCell.type &= ~GridManager.GridType.Weight;
             RemoveDecay();
         }
