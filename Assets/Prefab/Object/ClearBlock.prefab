@@ -106,6 +106,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ClearBlock
   targetStage: {fileID: 0}
   blockSpr: {fileID: 21300000, guid: 7308eb0bc7937574dbc3bb8fd3f0063a, type: 3}
-  blinkInterval: 0.1
+  blinkInterval: 0.3
   blinkCount: 6
-  showDuration: 0.8
+  showDuration: 1
