@@ -34,6 +34,9 @@ public class TurnManager : MonoBehaviour
     //クリアブロック
     private List<ClearBlock> clearBlocks = new List<ClearBlock>();
 
+    //コイン
+    private List<Coin> coins = new List<Coin>();
+
     void Awake()
     {
         //シングルトン化
@@ -97,6 +100,7 @@ public class TurnManager : MonoBehaviour
         CheckPlayerTrapped();
         CheckEnemyTrapped();
         CheckClearBlock();
+        CheckCoinCollect();
         CheckClear();
     }
     //敵とプレイヤーが同じマスにいるかどうか
@@ -221,6 +225,17 @@ public class TurnManager : MonoBehaviour
                 block.PlayFlash();
                 return;
             }
+        }
+    }
+    //コイン用関数
+    public void AddCoin(Coin coin) { if(!coins.Contains(coin))coins.Add(coin); }
+    public void RemoveCoin(Coin coin) {coins.Remove(coin); }
+    //プレイヤーがコインのマスにいるかチェック
+    void CheckCoinCollect()
+    {
+        foreach(var coin in coins.ToList())
+        {
+            if(coin.IsPosition(player.gridX,player.gridY))coin.Collect();
         }
     }
 
