@@ -1,16 +1,19 @@
 fileFormatVersion: 2
-guid: 7f3a37b29c60f9d4b893be95bd09fe4f
+guid: 7e854d9de6e2f94448efddb5d8584ac6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3990478639535615436
-    second: Lv3_0
+      213: -2315614261055856325
+    second: EarphoneUIAnime_0
   - first:
-      213: 7181195088997907724
-    second: Lv3_1
+      213: -1423615016875402447
+    second: EarphoneUIAnime_1
   - first:
-      213: -6393935054681024251
-    second: Lv3_2
+      213: 7673633546587543520
+    second: EarphoneUIAnime_2
+  - first:
+      213: -8737131149582925419
+    second: EarphoneUIAnime_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -43,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -52,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -106,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lv3_0
+      name: EarphoneUIAnime_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 33
-        width: 18
-        height: 30
+        x: 6
+        y: 10
+        width: 39
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ccded412e27016730800000000000000
-      internalID: 3990478639535615436
+      spriteID: b31efe429194ddfd0800000000000000
+      internalID: -2315614261055856325
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv3_1
+      name: EarphoneUIAnime_1
       rect:
         serializedVersion: 2
-        x: 39
-        y: 33
-        width: 12
-        height: 16
+        x: 37
+        y: 34
+        width: 9
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,20 +146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c0dff76c2eab8a360800000000000000
-      internalID: 7181195088997907724
+      spriteID: 13bda3e4fad4e3ce0800000000000000
+      internalID: -1423615016875402447
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lv3_2
+      name: EarphoneUIAnime_2
       rect:
         serializedVersion: 2
-        x: 53
-        y: 33
-        width: 28
-        height: 32
+        x: 56
+        y: 10
+        width: 39
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,8 +168,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 509d1dcb1fd2447a0800000000000000
-      internalID: -6393935054681024251
+      spriteID: 0e71fd0dd093e7a60800000000000000
+      internalID: 7673633546587543520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EarphoneUIAnime_3
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 32
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5910c11c2897fb680800000000000000
+      internalID: -8737131149582925419
       vertices: []
       indices: 
       edges: []
@@ -175,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -185,9 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lv3_0: 3990478639535615436
-      Lv3_1: 7181195088997907724
-      Lv3_2: -6393935054681024251
+      EarphoneUIAnime_0: -2315614261055856325
+      EarphoneUIAnime_1: -1423615016875402447
+      EarphoneUIAnime_2: 7673633546587543520
+      EarphoneUIAnime_3: -8737131149582925419
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
