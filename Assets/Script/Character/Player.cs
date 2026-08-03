@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     public AudioClip moveClip;
     public AudioClip damageClip;
 
+    //クリエイティブモード
+    public bool isCreativeMode = false;
+
     void Awake()
     {
         Instance = this;
