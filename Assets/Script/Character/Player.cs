@@ -1,6 +1,7 @@
 using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using static GridManager;
 
 public class Player : MonoBehaviour
@@ -36,6 +37,9 @@ public class Player : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip moveClip;
     public AudioClip damageClip;
+
+    //クリエイティブモード
+    public bool isCreativeMode = false;
 
     void Awake()
     {
@@ -110,6 +114,8 @@ public class Player : MonoBehaviour
     //左右上下のセルに移動可能かを取得
     public bool CanMove(Vector2Int direction)
     {
+        if (isCreativeMode) return true;//クリエイティブモードなら移動可能
+
         //セル情報の取得
         int targetX = gridX + direction.x;
         int targetY = gridY + direction.y;
@@ -126,12 +132,15 @@ public class Player : MonoBehaviour
         int targetX = gridX + lastDirection.x;
         int targetY = gridY + lastDirection.y;
 
-        //再度判定を取る（ダメージ判定のない壁になる敵が出てきた時用）
-        var targetCell = GridManager.Instance.GetCell(targetX, targetY);
-        if (targetCell == null || !targetCell.isWalk)
+        if (!isCreativeMode) 
         {
-            MoveCancel(targetCell,lastDirection);
-            return;
+            //再度判定を取る（ダメージ判定のない壁になる敵が出てきた時用）
+            var targetCell = GridManager.Instance.GetCell(targetX, targetY);
+            if (targetCell == null || !targetCell.isWalk)
+            {
+                MoveCancel(targetCell, lastDirection);
+                return;
+            }
         }
 
         //位置変更

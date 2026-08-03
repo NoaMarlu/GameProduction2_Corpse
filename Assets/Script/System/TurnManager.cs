@@ -106,6 +106,8 @@ public class TurnManager : MonoBehaviour
     //敵とプレイヤーが同じマスにいるかどうか
     void CheckPlayerEnemyCollision()
     {
+        if (player.isCreativeMode) return;
+
         foreach(var enemy in enemies)
         {
             //位置が同じならリセット
@@ -158,7 +160,7 @@ public class TurnManager : MonoBehaviour
     {
         var cell = GridManager.Instance.GetCell(player.gridX, player.gridY);
         //プレイヤーが腐敗マスにいるか
-        if(cell != null && (cell.type & GridManager.GridType.Decay) != 0)
+        if(!player.isCreativeMode && cell != null && (cell.type & GridManager.GridType.Decay) != 0)
         {
             TriggerPlayerDie();
             return;
@@ -198,6 +200,7 @@ public class TurnManager : MonoBehaviour
     //プレイヤーの位置が壁になってないか確認
     void CheckPlayerTrapped()
     {
+        if (player.isCreativeMode) return;
         var cell = GridManager.Instance.GetCell(player.gridX, player.gridY);
         if (cell != null && !cell.isWalk) { TriggerPlayerDie(); }
     }
