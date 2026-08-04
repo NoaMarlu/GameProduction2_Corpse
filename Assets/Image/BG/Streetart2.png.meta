@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 7e854d9de6e2f94448efddb5d8584ac6
+guid: 94a6fbe051150a04080bf75140245b43
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2315614261055856325
-    second: EarphoneUIAnime_0
-  - first:
-      213: -1423615016875402447
-    second: EarphoneUIAnime_1
-  - first:
-      213: 7673633546587543520
-    second: EarphoneUIAnime_2
-  - first:
-      213: -8737131149582925419
-    second: EarphoneUIAnime_3
+      213: -6574973684456373732
+    second: Streetart2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EarphoneUIAnime_0
+      name: Streetart2_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 10
-        width: 39
-        height: 28
+        x: 0
+        y: 0
+        width: 76
+        height: 74
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,74 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b31efe429194ddfd0800000000000000
-      internalID: -2315614261055856325
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: EarphoneUIAnime_1
-      rect:
-        serializedVersion: 2
-        x: 37
-        y: 34
-        width: 9
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 13bda3e4fad4e3ce0800000000000000
-      internalID: -1423615016875402447
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: EarphoneUIAnime_2
-      rect:
-        serializedVersion: 2
-        x: 56
-        y: 10
-        width: 39
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0e71fd0dd093e7a60800000000000000
-      internalID: 7673633546587543520
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: EarphoneUIAnime_3
-      rect:
-        serializedVersion: 2
-        x: 87
-        y: 32
-        width: 9
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5910c11c2897fb680800000000000000
-      internalID: -8737131149582925419
+      spriteID: c12cf6a054001c4a0800000000000000
+      internalID: -6574973684456373732
       vertices: []
       indices: 
       edges: []
@@ -210,10 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      EarphoneUIAnime_0: -2315614261055856325
-      EarphoneUIAnime_1: -1423615016875402447
-      EarphoneUIAnime_2: 7673633546587543520
-      EarphoneUIAnime_3: -8737131149582925419
+      Streetart2_0: -6574973684456373732
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
