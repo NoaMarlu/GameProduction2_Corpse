@@ -95,12 +95,12 @@ public class TurnManager : MonoBehaviour
 
         //移動後にチェック
         CheckPlayerEnemyCollision();
-        CheckDecay();
         CheckSwitchDoor();
         CheckPlayerTrapped();
         CheckEnemyTrapped();
         CheckClearBlock();
         CheckCoinCollect();
+        CheckDecay();
         CheckClear();
     }
     //敵とプレイヤーが同じマスにいるかどうか
@@ -137,9 +137,7 @@ public class TurnManager : MonoBehaviour
         turnState = TurnState.Wait;
         //打ってから状態が変わった可能性があるため
         CheckSwitchDoor();
-        CheckDecay();
         CheckClearBlock();
-        CheckDecay();
         CheckDecay();
     }
 
@@ -158,20 +156,31 @@ public class TurnManager : MonoBehaviour
     //腐敗マスチェック
     void CheckDecay()
     {
-        var cell = GridManager.Instance.GetCell(player.gridX, player.gridY);
-        //プレイヤーが腐敗マスにいるか
-        if(!player.isCreativeMode && cell != null && (cell.type & GridManager.GridType.Decay) != 0)
+        bool changed;
+
+        do
         {
-            TriggerPlayerDie();
-            return;
-        }
-        //敵が腐敗マスにいるか
-        foreach (var enemy in enemies.ToList())
-        {
-            var enemyCell = GridManager.Instance.GetCell(enemy.gridX, enemy.gridY);
-            //矢の衝突処理を使いまわす
-            if (enemyCell != null && (enemyCell.type & GridManager.GridType.Decay) != 0) enemy.HitArrow();
-        }
+            changed = false;
+            var cell = GridManager.Instance.GetCell(player.gridX, player.gridY);
+            //プレイヤーが腐敗マスにいるか
+            if (!player.isCreativeMode && cell != null && (cell.type & GridManager.GridType.Decay) != 0)
+            {
+                TriggerPlayerDie();
+                return;
+            }
+            //敵が腐敗マスにいるか
+            foreach (var enemy in enemies.ToList())
+            {
+                var enemyCell = GridManager.Instance.GetCell(enemy.gridX, enemy.gridY);
+                //矢の衝突処理を使いまわす
+                if (enemyCell != null && (enemyCell.type & GridManager.GridType.Decay) != 0) 
+                {
+                    enemy.HitArrow();
+                    changed = true;
+                }
+            }
+        } while (changed);
+
     }
     //クリアチェック
     void CheckClear() { StageManager.Instance.CheckCurrentStageClear(); }

@@ -18,6 +18,11 @@ public class StageManager : MonoBehaviour
 
     void Awake()
     {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
         audioSource = GetComponent<AudioSource>();
     }
@@ -54,7 +59,11 @@ public class StageManager : MonoBehaviour
     {
         if (currentStage == newStage) return;
         //前のステージを非アクティブにする
-        if (currentStage != null) currentStage.InactiveStage();
+        if (currentStage != null) 
+        {
+            if(!currentStage.isCleared)currentStage.ExitStageAndNoClear();
+            currentStage.InactiveStage(); 
+        }
         //新しいステージをアクティブにする
         currentStage = newStage;
         currentStage.stagePlayer = player;

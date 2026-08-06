@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: e3672126074780d40b8cb3254d7d1f04
+guid: dd1cf606bc0d21b4ca010492a33e7935
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6793660326504413151
-    second: Lstick_0
+      213: 2986095105091660353
+    second: Button2_0
+  - first:
+      213: 8616442935391326041
+    second: Button2_1
+  - first:
+      213: -6123735545411238074
+    second: Button2_2
+  - first:
+      213: 820772204878148113
+    second: Button2_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lstick_0
+      name: Button2_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 46
-        height: 46
+        x: 3
+        y: 19
+        width: 17
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1284a0a6de118b1a0800000000000000
-      internalID: -6793660326504413151
+      spriteID: 14a65845dadb07920800000000000000
+      internalID: 2986095105091660353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button2_1
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 30
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95f8c67a231c39770800000000000000
+      internalID: 8616442935391326041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button2_2
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 19
+        width: 17
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 647845567fe140ba0800000000000000
+      internalID: -6123735545411238074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Button2_3
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 3
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 112b641c8f7f36b00800000000000000
+      internalID: 820772204878148113
       vertices: []
       indices: 
       edges: []
@@ -135,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lstick_0: -6793660326504413151
+      Button2_0: 2986095105091660353
+      Button2_1: 8616442935391326041
+      Button2_2: -6123735545411238074
+      Button2_3: 820772204878148113
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

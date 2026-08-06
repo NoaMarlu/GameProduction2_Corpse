@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: e3672126074780d40b8cb3254d7d1f04
+guid: e1c62a583a8273e4cbf8d1c669d85bbe
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6793660326504413151
-    second: Lstick_0
+      213: -4532802534543348379
+    second: OR_0
+  - first:
+      213: 4425531695128311531
+    second: OR_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lstick_0
+      name: OR_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 46
-        height: 46
+        x: 9
+        y: 15
+        width: 14
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +118,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1284a0a6de118b1a0800000000000000
-      internalID: -6793660326504413151
+      spriteID: 56dad835c104811c0800000000000000
+      internalID: -4532802534543348379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OR_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 15
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be6fa5611a5aa6d30800000000000000
+      internalID: 4425531695128311531
       vertices: []
       indices: 
       edges: []
@@ -135,7 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lstick_0: -6793660326504413151
+      OR_0: -4532802534543348379
+      OR_1: 4425531695128311531
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
