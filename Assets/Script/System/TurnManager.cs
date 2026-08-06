@@ -37,6 +37,10 @@ public class TurnManager : MonoBehaviour
     //コイン
     private List<Coin> coins = new List<Coin>();
 
+    //SE
+    private AudioSource audioSource;
+    public AudioClip clearBlock;
+
     void Awake()
     {
         //シングルトン化
@@ -46,6 +50,7 @@ public class TurnManager : MonoBehaviour
             return;
         }
         Instance = this;
+        audioSource = GetComponent<AudioSource>();
     }
 
     //プレイヤーの登録
@@ -234,6 +239,8 @@ public class TurnManager : MonoBehaviour
         {
             if (block.IsPosition(x, y))
             {
+                CameraManager.Instance.Shake();
+                if(audioSource != null && clearBlock != null)audioSource.PlayOneShot(clearBlock);
                 block.PlayFlash();
                 return;
             }

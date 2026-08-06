@@ -42793,6 +42793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TurnManager
   turnState: 0
   arrowPrefab: {fileID: 3518695616338780908, guid: 65902367f60de0240a5a18f96fbc1422, type: 3}
+  clearBlock: {fileID: 8300000, guid: bced0e4c7de56f5408e7a5c9e440a820, type: 3}
 --- !u!114 &1968715654
 MonoBehaviour:
   m_ObjectHideFlags: 0
