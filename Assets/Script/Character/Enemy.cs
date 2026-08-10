@@ -302,5 +302,10 @@ public class Enemy : MonoBehaviour
         if (dirY > 0) animator.SetTrigger("Up");
         else animator.SetTrigger("Down");
     }
+    //アニメーションのスピードを変更
+    public void SetAnimatorSpeed(float speed)
+    {
+        if (animator != null) animator.speed = speed;
+    }
 
 }

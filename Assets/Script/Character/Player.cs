@@ -302,12 +302,17 @@ public class Player : MonoBehaviour
     {
         animator.SetTrigger(trigger);
     }
-
+    //ワープ時の初期位置に戻す
     public void WarpInitPos()
     {
         gridX = initGridX;
         gridY = initGridY;
         SnapToGrid();
+    }
+    //アニメーション速度変更
+    public void SetAnimatorSpeed(float speed)
+    {
+        if(animator != null )animator.speed = speed;
     }
 
 }

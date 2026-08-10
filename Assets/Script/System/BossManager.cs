@@ -15,6 +15,7 @@ public class BossManager : MonoBehaviour
 
     //アニメーション
     private bool isFinalHit = false;
+    public float bossAnimeSpeed = 1.5f;
 
     void Awake()
     {
@@ -28,6 +29,7 @@ public class BossManager : MonoBehaviour
 
     void Start()
     {
+        ApplyBossAnimeSpeed();
         boss.SetMode(Boss.BossMode.Opening);
     }
 
@@ -49,6 +51,8 @@ public class BossManager : MonoBehaviour
         activeStage = stage;
         stage.ActiveStage();
         stage.WarpPlayerInit(TurnManager.Instance.GetPlayer());
+        //アニメーション速度も変更
+        ApplyBossAnimeSpeed();
     }
     //プレイヤーが動くたびに呼ばれる
     public void PlayerMove()
@@ -76,6 +80,15 @@ public class BossManager : MonoBehaviour
         if (currentPhase < puzzleStage.Count)
         {
             StartPhase(currentPhase);
+        }
+    }
+    //各アニメーションの速度を変更する
+    void ApplyBossAnimeSpeed()
+    {
+        TurnManager.Instance.GetPlayer().SetAnimatorSpeed(bossAnimeSpeed);
+        foreach(var enemy in TurnManager.Instance.GetEnemies())
+        {
+            enemy.SetAnimatorSpeed(bossAnimeSpeed);
         }
     }
 
