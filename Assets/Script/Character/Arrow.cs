@@ -43,7 +43,11 @@ public class Arrow : MonoBehaviour
             var targetCell  = GridManager.Instance.GetCell(targetX, targetY);
 
             //âÊñ äOÇ»ÇÁçÌèú
-            if (targetCell == null) break;
+            if (targetCell == null)
+            {
+                yield return StartCoroutine(MoveHalfCellAndStop());
+                break;
+            }
 
             Enemy hitEnemy = FindEnemy(targetX, targetY);
             BossWeakPoint hitWeakPoint = FindWeakPoint(targetX, targetY);
@@ -129,6 +133,22 @@ public class Arrow : MonoBehaviour
             if (wp.IsAtPosition(x, y)) return wp;
         }
         return null;
+    }
+    //É}ÉXñ⁄Ç¨ÇËÇ¨ÇËÇ≈í‚é~
+    private IEnumerator MoveHalfCellAndStop()
+    {
+        Vector3 startPos = transform.position;
+        Vector3 nextCell = GridManager.Instance.GridToWorld(gridX + direction.x, gridY + direction.y);
+        Vector3 halfPos = Vector3.Lerp(startPos, nextCell, 0.5f);
+
+        float elapsed = 0f;
+        while (elapsed < moveSpeed * 0.5f)
+        {
+            elapsed += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPos, halfPos, elapsed / (moveSpeed * 0.5f));
+            yield return null;
+        }
+        transform.position = halfPos;
     }
 
 }
