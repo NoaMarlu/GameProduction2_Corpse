@@ -46,6 +46,7 @@ public class Arrow : MonoBehaviour
             if (targetCell == null) break;
 
             Enemy hitEnemy = FindEnemy(targetX, targetY);
+            BossWeakPoint hitWeakPoint = FindWeakPoint(targetX, targetY);
 
             yield return StartCoroutine(MoveOneCell(targetX, targetY,targetCell));
 
@@ -55,6 +56,12 @@ public class Arrow : MonoBehaviour
             //格子用
             bool blocksArrow = !targetCell.isWalk && targetCell.arrowBlock;
             if (blocksArrow) break;
+
+            if(hitWeakPoint != null)
+            {
+                hitWeakPoint.HitArrow();
+                break;
+            }
 
             //敵なら待つ
             if(hitEnemy != null)
@@ -110,6 +117,16 @@ public class Arrow : MonoBehaviour
             {
                 if (enemy.currentStage == activeStage) return enemy;
             }
+        }
+        return null;
+    }
+    //引数のマスに弱点があるか検索
+    private BossWeakPoint FindWeakPoint(int x,int y)
+    {
+        BossWeakPoint[] allWeakPoint = FindObjectsByType<BossWeakPoint>(FindObjectsSortMode.None);
+        foreach(var wp in allWeakPoint)
+        {
+            if (wp.IsAtPosition(x, y)) return wp;
         }
         return null;
     }

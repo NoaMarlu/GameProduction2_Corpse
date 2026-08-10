@@ -134,5 +134,11 @@ public class Stage : MonoBehaviour
     public bool ClearGrid(Vector2Int gridPos) { return gridPos.x == clearGridPos.x && gridPos.y == clearGridPos.y; }
     //エネミーが全部遺体か確認
     public bool IsAllEnemyDefeated() { return stageEnemies.All(e => e.IsCorpse()); }
+    //プレイヤーをスポーン位置に戻す
+    public void WarpPlayerInit(Player player)
+    {
+        player.SetInitPos(initGridPos);
+        player.WarpInitPos();
+    }
 
 }

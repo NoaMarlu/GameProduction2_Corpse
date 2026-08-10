@@ -98,6 +98,9 @@ public class TurnManager : MonoBehaviour
 
         player.PlayerMove();
 
+        //ボス戦なら移動するたびにボスの行動を呼ぶ
+        if (BossManager.Instance != null) BossManager.Instance.PlayerMove();
+
         //移動後にチェック
         CheckPlayerEnemyCollision();
         CheckSwitchDoor();

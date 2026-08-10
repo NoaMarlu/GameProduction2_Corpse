@@ -303,4 +303,11 @@ public class Player : MonoBehaviour
         animator.SetTrigger(trigger);
     }
 
+    public void WarpInitPos()
+    {
+        gridX = initGridX;
+        gridY = initGridY;
+        SnapToGrid();
+    }
+
 }
