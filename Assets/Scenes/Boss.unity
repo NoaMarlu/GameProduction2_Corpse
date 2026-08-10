@@ -2906,7 +2906,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
   mode: 0
-  bossSpr: []
+  anime:
+  - BossPose5Anime
+  - BossPoseNormal
   totalHit: 3
 --- !u!1 &1983673266
 GameObject:

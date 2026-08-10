@@ -13,8 +13,7 @@ public class Boss : MonoBehaviour
     public  BossMode mode = BossMode.Opening;
 
     //スプライト
-    public Sprite[] bossSpr;
-    private SpriteRenderer spr;
+    public string[] anime;
     private Animator animator;
 
     //弱点設定
@@ -23,7 +22,6 @@ public class Boss : MonoBehaviour
 
     void Awake()
     {
-        spr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
     }
 
@@ -61,8 +59,8 @@ public class Boss : MonoBehaviour
     public void OnPlayerMove()
     {
         if (mode != BossMode.Play) return;
-        if (bossSpr == null || bossSpr.Length == 0) return;
-        spr.sprite = bossSpr[Random.Range(0, bossSpr.Length)];
+        if (anime == null || anime.Length == 0) return;
+        animator.Play(anime[Random.Range(0, anime.Length)]);
     }
 
     public void OnWeakPointHit()
