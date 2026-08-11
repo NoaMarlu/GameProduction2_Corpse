@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
-using UnityEngine.Video;
 using System.Data;
 
 public class TurnManager : MonoBehaviour
@@ -43,6 +42,9 @@ public class TurnManager : MonoBehaviour
 
     //リセット
     public float resetDuration = 1.5f;//リセット待機時間
+
+    //ロード画面処理
+    private List<SceneLoader> sceneLoaders = new List<SceneLoader>();
 
     void Awake()
     {
@@ -112,6 +114,7 @@ public class TurnManager : MonoBehaviour
         CheckClearBlock();
         CheckCoinCollect();
         CheckDecay();
+        CheckSceneLoader();
         CheckClear();
     }
     //敵とプレイヤーが同じマスにいるかどうか
@@ -272,6 +275,20 @@ public class TurnManager : MonoBehaviour
        StageManager.Instance.CurrentStageReset();
         yield return new WaitForSeconds(resetDuration);
         turnState = TurnState.Wait;
+    }
+    //ロード画面の登録
+    public void AddSceneLoader(SceneLoader loader) { if (!sceneLoaders.Contains(loader)) sceneLoaders.Add(loader); }
+    //プレイヤーがロード画面のマスにいるかチェック
+    public void CheckSceneLoader()
+    {
+        foreach(var loader in sceneLoaders)
+        {
+            if(loader.IsAtPosition(player.gridX,player.gridY))
+            {
+                loader.TriggerLoad();
+                return;
+            }
+        }
     }
 
 }

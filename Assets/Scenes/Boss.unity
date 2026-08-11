@@ -2504,6 +2504,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossManager
   boss: {fileID: 1940307159}
   puzzleStage: []
+  bossAnimeSpeed: 1.5
+--- !u!1 &1681727041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1681727042}
+  m_Layer: 0
+  m_Name: '#STAGE1'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1681727042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681727041}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1704089317
 GameObject:
   m_ObjectHideFlags: 0
@@ -2848,6 +2880,7 @@ MonoBehaviour:
   turnState: 0
   arrowPrefab: {fileID: 3518695616338780908, guid: 65902367f60de0240a5a18f96fbc1422, type: 3}
   clearBlock: {fileID: 0}
+  resetDuration: 1.5
 --- !u!114 &1828559326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3369,3 +3402,4 @@ SceneRoots:
   - {fileID: 1624437990}
   - {fileID: 1571948469}
   - {fileID: 692616935}
+  - {fileID: 1681727042}

@@ -7,7 +7,7 @@ public class Title : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame) SceneManager.LoadScene("GameScene");
+        if (Keyboard.current.spaceKey.wasPressedThisFrame) SceneManager.LoadScene("Tutorial");
     }
 
 }
