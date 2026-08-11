@@ -208,6 +208,8 @@ MonoBehaviour:
   decayPrefab: {fileID: 6589951165396987466, guid: 5a8fe67b94be206429b99969386d5990, type: 3}
   dieSpr: {fileID: 21300000, guid: a36b02d28e37f8346a5e72cd5db093be, type: 3}
   damageClip: {fileID: 8300000, guid: 4cc31f1baf9db044b9298037e8f2cf1b, type: 3}
+  upToDownMode: 0
+  resetEffect: {fileID: 7662506956926749654, guid: c5a0cca412fafcd4091e22f438781091, type: 3}
 --- !u!95 &256325819661457415
 Animator:
   serializedVersion: 7

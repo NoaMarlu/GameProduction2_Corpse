@@ -39,11 +39,11 @@ public class StageManager : MonoBehaviour
         //リセット入力
         if(Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame)
         {
-            CurrentStageReset();
+            TurnManager.Instance.RequestStageReset();
         }
         else if (Keyboard.current.rKey.wasPressedThisFrame)
         {
-            CurrentStageReset();
+            TurnManager.Instance.RequestStageReset();
         }
     }
     //現在のステージをリセット

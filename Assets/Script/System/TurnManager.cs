@@ -41,6 +41,9 @@ public class TurnManager : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip clearBlock;
 
+    //リセット
+    public float resetDuration = 1.5f;//リセット待機時間
+
     void Awake()
     {
         //シングルトン化
@@ -208,9 +211,9 @@ public class TurnManager : MonoBehaviour
     {
         //死亡演出中の待機時間
         yield return new WaitForSeconds(0.3f);
-
-        turnState = TurnState.Wait;
         StageManager.Instance.CurrentStageReset();
+        yield return new WaitForSeconds(resetDuration);
+        turnState = TurnState.Wait;
         isDying = false;
     }
     void PlayHitEffects() { CameraManager.Instance.Shake();}
@@ -259,6 +262,16 @@ public class TurnManager : MonoBehaviour
         {
             if(coin.IsPosition(player.gridX,player.gridY))coin.Collect();
         }
+    }
+    //外部から呼ばれるリセット処理
+    public void RequestStageReset() { StartCoroutine(ResetWithLock()); }
+    //リセット待機
+    IEnumerator ResetWithLock()
+    {
+        turnState = TurnState.Action;
+       StageManager.Instance.CurrentStageReset();
+        yield return new WaitForSeconds(resetDuration);
+        turnState = TurnState.Wait;
     }
 
 }

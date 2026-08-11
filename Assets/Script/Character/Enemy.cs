@@ -60,6 +60,9 @@ public class Enemy : MonoBehaviour
     public int upToDownMode = 0;
     //0だとスプライトを上下反転、1だとスプライトを反転せずアニメーションを変更
 
+    //リセットエフェクト
+    public GameObject resetEffect;
+
     void Awake()
     {
         initSpr = GetComponent<SpriteRenderer>().sprite;
@@ -222,6 +225,13 @@ public class Enemy : MonoBehaviour
         gridY = initGridY;
         lastDirection = initDirection;
         SnapToGrid();
+        //リスポーンエフェクト
+      if(resetEffect != null)
+        {
+            Vector3 spawnPos = GridManager.Instance.GridToWorld(gridX, gridY);
+            Instantiate(resetEffect, spawnPos, Quaternion.identity);
+        }
+
         //見た目関連
         if (spr != null) spr.sprite = initSpr;
         //アニメーションを最初から
