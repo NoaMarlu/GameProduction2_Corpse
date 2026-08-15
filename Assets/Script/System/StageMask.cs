@@ -5,6 +5,7 @@ public class StageMask : MonoBehaviour
     public static StageMask Instance { get; private set; }
 
     public SpriteRenderer maskRenderer;//マスクのスプライト
+    public SpriteRenderer maskedRenderer;
 
     void Awake()
     {
@@ -14,18 +15,19 @@ public class StageMask : MonoBehaviour
             return;
         }
         Instance = this;
+        HideMask();
     }
 
     //ステージに入ったら呼ぶ
-    public void ShowMaskFor(Stage stage)
+    public void ShowMask()
     {
-        if (maskRenderer == null) return;
-        maskRenderer.gameObject.SetActive(true);
+        if(maskRenderer != null)maskRenderer.gameObject.SetActive(true);
+        if(maskedRenderer != null)maskedRenderer.gameObject.SetActive(true);
     }
     public void HideMask()
     {
-        if (maskRenderer == null) return;
-        maskRenderer.gameObject.SetActive(false);
+        if (maskRenderer != null)maskRenderer.gameObject.SetActive(false);
+        if(maskedRenderer != null)maskedRenderer.gameObject.SetActive(false);
     }
 
 }

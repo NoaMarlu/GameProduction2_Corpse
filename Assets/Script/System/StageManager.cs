@@ -74,6 +74,7 @@ public class StageManager : MonoBehaviour
     {
         if (currentStage != exitStage) return;
         if (!currentStage.isCleared) currentStage.ExitStageAndNoClear();
+        StageMask.Instance.HideMask();
         currentStage.InactiveStage();
         currentStage = null;
     }
