@@ -114,7 +114,6 @@ public class TurnManager : MonoBehaviour
         CheckClearBlock();
         CheckCoinCollect();
         CheckDecay();
-        CheckSceneLoader();
         CheckClear();
     }
     //敵とプレイヤーが同じマスにいるかどうか
@@ -278,17 +277,5 @@ public class TurnManager : MonoBehaviour
     }
     //ロード画面の登録
     public void AddSceneLoader(SceneLoader loader) { if (!sceneLoaders.Contains(loader)) sceneLoaders.Add(loader); }
-    //プレイヤーがロード画面のマスにいるかチェック
-    public void CheckSceneLoader()
-    {
-        foreach(var loader in sceneLoaders)
-        {
-            if(loader.IsAtPosition(player.gridX,player.gridY))
-            {
-                loader.TriggerLoad();
-                return;
-            }
-        }
-    }
 
 }
