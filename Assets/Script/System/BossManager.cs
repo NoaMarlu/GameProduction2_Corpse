@@ -48,6 +48,12 @@ public class BossManager : MonoBehaviour
     void ActivatePuzzle(Stage stage)
     {
         if (activeStage != null) activeStage.InactiveStage();
+        foreach(var ps in puzzleStage)
+        {
+            ps.ResetStage();
+            ps.gameObject.SetActive(false); 
+        }
+        stage.gameObject.SetActive(true);
         activeStage = stage;
         stage.ActiveStage();
         stage.WarpPlayerInit(TurnManager.Instance.GetPlayer());
