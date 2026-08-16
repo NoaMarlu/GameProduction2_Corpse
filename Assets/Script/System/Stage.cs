@@ -58,7 +58,7 @@ public class Stage : MonoBehaviour
         //カメラをLerp遷移
         CameraManager.Instance.MoveTo(cameraPos);
 
-        StageMask.Instance.ShowMask();
+        if(StageMask.Instance != null)StageMask.Instance.ShowMask();
     }
     //ステージを非アクティブにする
     public void InactiveStage()

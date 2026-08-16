@@ -32,6 +32,7 @@ public class TurnManager : MonoBehaviour
 
     //クリアブロック
     private List<ClearBlock> clearBlocks = new List<ClearBlock>();
+    private List<ClearDoor> clearDoors = new List<ClearDoor>();
 
     //コイン
     private List<Coin> coins = new List<Coin>();
@@ -115,6 +116,7 @@ public class TurnManager : MonoBehaviour
         CheckCoinCollect();
         CheckDecay();
         CheckClear();
+        CheckClearDoor();
     }
     //敵とプレイヤーが同じマスにいるかどうか
     void CheckPlayerEnemyCollision()
@@ -152,6 +154,7 @@ public class TurnManager : MonoBehaviour
         CheckSwitchDoor();
         CheckClearBlock();
         CheckDecay();
+        CheckClearDoor();
     }
 
     /*スイッチ関連*/
@@ -239,8 +242,10 @@ public class TurnManager : MonoBehaviour
     public void ChangeTurnState(TurnState state){ turnState = state; }
     //クリアブロックの追加
     public void AddClearBlock(ClearBlock block) { if (!clearBlocks.Contains(block)) clearBlocks.Add(block); }
+    public void AddClearDoor(ClearDoor door) { if (!clearDoors.Contains(door)) clearDoors.Add(door); }
     //全クリアブロックの確認
     void CheckClearBlock() { foreach (var block in clearBlocks) block.CheckBlock(); }
+    void CheckClearDoor() { foreach (var door in clearDoors) { door.CheckDoor(); } }
     public void BlockedMove(int x,int y)
     {
         foreach(var block in clearBlocks)
