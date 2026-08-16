@@ -49,6 +49,7 @@ public class Boss : MonoBehaviour
     void PlayDamage()
     {
         if(animator != null)animator.SetTrigger("Damage");
+        CameraManager.Instance.Shake();
     }
     //ì¢î∞ââèo
     void PlayDie()
