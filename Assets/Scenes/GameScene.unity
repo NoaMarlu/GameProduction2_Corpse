@@ -16293,6 +16293,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 6292951538265463826, guid: e97fbc97146a30749a6e1069139b8c9a, type: 3}
+      propertyPath: targetStage
+      value: 
+      objectReference: {fileID: 224405636}
     - target: {fileID: 7458216358314540747, guid: e97fbc97146a30749a6e1069139b8c9a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 27.5
@@ -57272,11 +57276,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4208973602979761177, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.7
+      value: 14.73
       objectReference: {fileID: 0}
     - target: {fileID: 4208973602979761177, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.3
+      value: 15.14
       objectReference: {fileID: 0}
     - target: {fileID: 4208973602979761177, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
       propertyPath: m_LocalPosition.z
