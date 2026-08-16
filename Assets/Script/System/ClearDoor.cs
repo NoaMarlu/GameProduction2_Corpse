@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ClearDoor : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class ClearDoor : MonoBehaviour
 
     private float currentFrame = 0f;
     private Tween frameTween;
+
+    //スイッチ処理
+    public List<Switch> linkSwitches = new List<Switch>();
 
     void Awake()
     {
@@ -38,6 +42,16 @@ public class ClearDoor : MonoBehaviour
     public void CheckDoor()
     {
         bool isCleared = (targetStage != null && targetStage.IsAllEnemyDefeated());
+        bool allSwitchesOn = true;
+
+        foreach(var sw in linkSwitches)
+        {
+            if (!sw.isOn)
+            {
+                allSwitchesOn = false;
+                break;
+            }
+        }
 
         if(isCleared != isOpen)
         {

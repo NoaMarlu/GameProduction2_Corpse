@@ -55,8 +55,10 @@ public class Stage : MonoBehaviour
 
         //プレイヤーの初期位置を設定
         if (stagePlayer != null) stagePlayer.SetInitPos(initGridPos);
+        
+        if(cameraMarker != null)CameraManager.Instance.MoveTo(cameraMarker.transform.position);
 
-        if(StageMask.Instance != null)StageMask.Instance.ShowMask();
+        if (StageMask.Instance != null)StageMask.Instance.ShowMask();
     }
     //ステージを非アクティブにする
     public void InactiveStage()

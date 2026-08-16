@@ -129,7 +129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4208973602979761177, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4208973602979761177, guid: dcc7cca4aa078de488e19d13287cfebb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1836,6 +1836,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 404837882}
+  - {fileID: 1947161003}
   - {fileID: 2045902466}
   - {fileID: 1828559322}
   - {fileID: 1670982142}
@@ -3203,6 +3204,37 @@ MonoBehaviour:
   - BossPose5Anime
   - BossPoseNormal
   totalHit: 3
+--- !u!1 &1947161002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1947161003}
+  m_Layer: 0
+  m_Name: CameraMarker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1947161003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947161002}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.5, y: 6.53, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 923026341}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1983673266
 GameObject:
   m_ObjectHideFlags: 0
@@ -3838,7 +3870,7 @@ MonoBehaviour:
   clearMarker: {fileID: 9120240461474382289}
   isCleared: 0
   initMarker: {fileID: 6877845744364008283}
-  cameraMarker: {fileID: 3829474082829136267}
+  cameraMarker: {fileID: 1947161002}
   triggerCollider: {fileID: 6670456465445792813}
 --- !u!1001 &849810487240225754
 PrefabInstance:
@@ -4356,7 +4388,7 @@ MonoBehaviour:
   clearMarker: {fileID: 4239658590756190985}
   isCleared: 0
   initMarker: {fileID: 3483918881970821996}
-  cameraMarker: {fileID: 2922615924780626369}
+  cameraMarker: {fileID: 1947161002}
   triggerCollider: {fileID: 8029705667297382487}
 --- !u!114 &2452927978714262570
 MonoBehaviour:
@@ -4377,7 +4409,7 @@ MonoBehaviour:
   clearMarker: {fileID: 5224314027067548593}
   isCleared: 0
   initMarker: {fileID: 3693028790955490178}
-  cameraMarker: {fileID: 8091835372086745388}
+  cameraMarker: {fileID: 1947161002}
   triggerCollider: {fileID: 217916385870760558}
 --- !u!1 &2922615924780626369
 GameObject:
