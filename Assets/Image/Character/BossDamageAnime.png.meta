@@ -70,7 +70,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -84,7 +84,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 22
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,12 +136,12 @@ TextureImporter:
       name: BossDamageAnime_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 146
-        width: 54
-        height: 66
+        x: 0
+        y: 133
+        width: 222
+        height: 133
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -158,12 +158,12 @@ TextureImporter:
       name: BossDamageAnime_1
       rect:
         serializedVersion: 2
-        x: 60
-        y: 136
-        width: 98
-        height: 124
+        x: 222
+        y: 133
+        width: 222
+        height: 133
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -180,12 +180,12 @@ TextureImporter:
       name: BossDamageAnime_2
       rect:
         serializedVersion: 2
-        x: 158
-        y: 146
-        width: 54
-        height: 66
+        x: 0
+        y: 0
+        width: 222
+        height: 133
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -202,12 +202,12 @@ TextureImporter:
       name: BossDamageAnime_3
       rect:
         serializedVersion: 2
-        x: 228
-        y: 152
-        width: 53
-        height: 50
+        x: 222
+        y: 0
+        width: 222
+        height: 133
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -220,187 +220,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: BossDamageAnime_4
-      rect:
-        serializedVersion: 2
-        x: 282
-        y: 136
-        width: 92
-        height: 126
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9f3d31b7853975090800000000000000
-      internalID: -8045800201042799623
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BossDamageAnime_5
-      rect:
-        serializedVersion: 2
-        x: 381
-        y: 160
-        width: 56
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6be5f513dc49a41a0800000000000000
-      internalID: -6824478676309025098
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BossDamageAnime_6
-      rect:
-        serializedVersion: 2
-        x: 4
-        y: 15
-        width: 56
-        height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c13d0e4b56161f2b0800000000000000
-      internalID: -5552549776116886756
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BossDamageAnime_7
-      rect:
-        serializedVersion: 2
-        x: 58
-        y: 3
-        width: 94
-        height: 121
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 79c95db3dd0b3f5e0800000000000000
-      internalID: -1876962155445248873
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BossDamageAnime_8
-      rect:
-        serializedVersion: 2
-        x: 159
-        y: 27
-        width: 53
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e542ccd698039ec80800000000000000
-      internalID: -8293043872015309730
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BossDamageAnime_9
-      rect:
-        serializedVersion: 2
-        x: 231
-        y: 9
-        width: 56
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 295fa03fb271e6f80800000000000000
-      internalID: -8111520401319070318
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BossDamageAnime_10
-      rect:
-        serializedVersion: 2
-        x: 266
-        y: 3
-        width: 108
-        height: 122
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f40e99a2f9edb9810800000000000000
-      internalID: 1773255653496315983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BossDamageAnime_11
-      rect:
-        serializedVersion: 2
-        x: 372
-        y: 14
-        width: 58
-        height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5fd5fbcc1abe22450800000000000000
-      internalID: 6062667128551464437
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b2c66310d492d964e9ec12095ff2e3d0
     internalID: 0
     vertices: []
     indices: 
@@ -408,20 +232,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":2.0},"gridSpriteSize":{"x":222.0,"y":133.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       BossDamageAnime_0: 5905141102226586245
       BossDamageAnime_1: -2013053067097259061
-      BossDamageAnime_10: 1773255653496315983
-      BossDamageAnime_11: 6062667128551464437
       BossDamageAnime_2: 6403230482728007637
       BossDamageAnime_3: -1488890216894898533
-      BossDamageAnime_4: -8045800201042799623
-      BossDamageAnime_5: -6824478676309025098
-      BossDamageAnime_6: -5552549776116886756
-      BossDamageAnime_7: -1876962155445248873
-      BossDamageAnime_8: -8293043872015309730
-      BossDamageAnime_9: -8111520401319070318
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
