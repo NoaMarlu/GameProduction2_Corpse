@@ -37,7 +37,7 @@ public class ClearDoor : MonoBehaviour
     //クリアチェック
     public void CheckDoor()
     {
-        bool isCleared = (targetStage != null && targetStage.isCleared);
+        bool isCleared = (targetStage != null && targetStage.IsAllEnemyDefeated());
 
         if(isCleared != isOpen)
         {
