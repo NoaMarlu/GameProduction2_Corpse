@@ -15,6 +15,7 @@ public class Boss : MonoBehaviour
     //スプライト
     public string[] anime;
     private Animator animator;
+    private int lastAnimeIndex = -1;
 
     //弱点設定
     public int totalHit = 3;//何回で死亡するか
@@ -60,7 +61,16 @@ public class Boss : MonoBehaviour
     {
         if (mode != BossMode.Play) return;
         if (anime == null || anime.Length == 0) return;
-        animator.Play(anime[Random.Range(0, anime.Length)]);
+
+        int newIndex;
+        do
+        {
+            newIndex = Random.Range(0, anime.Length);
+        }
+        while (newIndex == lastAnimeIndex);
+
+        lastAnimeIndex = newIndex;
+        animator.Play(anime[newIndex]);
     }
 
     public void OnWeakPointHit()

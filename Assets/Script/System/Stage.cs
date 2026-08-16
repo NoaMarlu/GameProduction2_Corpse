@@ -55,8 +55,6 @@ public class Stage : MonoBehaviour
 
         //プレイヤーの初期位置を設定
         if (stagePlayer != null) stagePlayer.SetInitPos(initGridPos);
-        //カメラをLerp遷移
-        CameraManager.Instance.MoveTo(cameraPos);
 
         if(StageMask.Instance != null)StageMask.Instance.ShowMask();
     }
