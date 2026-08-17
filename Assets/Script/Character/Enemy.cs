@@ -308,6 +308,9 @@ public class Enemy : MonoBehaviour
     void PlayUpDownAnime(int dirY)
     {
         if (animator == null) return;
+        //アニメーションをリセット
+        animator.ResetTrigger("Up");
+        animator.ResetTrigger("Down");
         //方向でトリガー管理
         if (dirY > 0) animator.SetTrigger("Up");
         else animator.SetTrigger("Down");
