@@ -53,9 +53,11 @@ public class ClearDoor : MonoBehaviour
             }
         }
 
-        if(isCleared != isOpen)
+        bool shouldOpen = isCleared && allSwitchesOn;
+
+        if(shouldOpen != isOpen)
         {
-            AddState(isCleared);
+            AddState(shouldOpen);
             PlayFrameAnimation();
         }
     }
