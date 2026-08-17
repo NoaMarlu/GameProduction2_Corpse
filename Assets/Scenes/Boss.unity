@@ -3205,7 +3205,7 @@ MonoBehaviour:
   - BossPose5Anime
   - BossPoseNormal
   totalHit: 3
-  damageSE: {fileID: 0}
+  damageSE: {fileID: 8300000, guid: 4cc31f1baf9db044b9298037e8f2cf1b, type: 3}
 --- !u!82 &1940307160
 AudioSource:
   m_ObjectHideFlags: 0
