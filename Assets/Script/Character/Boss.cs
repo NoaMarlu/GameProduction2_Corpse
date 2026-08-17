@@ -21,9 +21,14 @@ public class Boss : MonoBehaviour
     public int totalHit = 3;//‰½‰ñ‚Å€–S‚·‚é‚©
     private int currentHits = 0;
 
+    //SE
+    private AudioSource audioSource;
+    public AudioClip damageSE;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     //ƒ‚[ƒh‚É‚ ‚í‚¹‚Äˆ—‚ğØ‚è‘Ö‚¦
@@ -50,6 +55,7 @@ public class Boss : MonoBehaviour
     {
         if(animator != null)animator.SetTrigger("Damage");
         CameraManager.Instance.Shake();
+        if (audioSource != null && damageSE != null) audioSource.PlayOneShot(damageSE);
     }
     //“¢”°‰‰o
     void PlayDie()
