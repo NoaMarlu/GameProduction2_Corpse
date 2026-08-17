@@ -16995,6 +16995,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy5Anime_0
       objectReference: {fileID: 0}
+    - target: {fileID: 1321309111786465627, guid: bed703db74b5a054086eb828ffd82e18, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 43084c81963b0eb40831f354685735dd, type: 3}
     - target: {fileID: 1339622811404949165, guid: bed703db74b5a054086eb828ffd82e18, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.5
@@ -17034,6 +17038,10 @@ PrefabInstance:
     - target: {fileID: 1339622811404949165, guid: bed703db74b5a054086eb828ffd82e18, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045450343323759890, guid: bed703db74b5a054086eb828ffd82e18, type: 3}
+      propertyPath: level
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -53613,11 +53621,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1339622811404949165, guid: bed703db74b5a054086eb828ffd82e18, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.5
+      value: 24.5
       objectReference: {fileID: 0}
     - target: {fileID: 1339622811404949165, guid: bed703db74b5a054086eb828ffd82e18, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.5
+      value: 26.5
       objectReference: {fileID: 0}
     - target: {fileID: 1339622811404949165, guid: bed703db74b5a054086eb828ffd82e18, type: 3}
       propertyPath: m_LocalPosition.z
