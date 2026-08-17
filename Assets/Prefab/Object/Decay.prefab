@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 249327435204137308}
   - component: {fileID: 4808052857277943418}
   - component: {fileID: 7687087697917271482}
+  - component: {fileID: 2486426051905356069}
   m_Layer: 0
   m_Name: Decay
   m_TagString: Untagged
@@ -114,3 +115,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2486426051905356069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6589951165396987466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c4d7f706dcde346856291d65ce7337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DecayAnime
