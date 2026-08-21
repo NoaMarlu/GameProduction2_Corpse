@@ -20,6 +20,7 @@ public class GridManager : MonoBehaviour
         PlayerDamaged       =1<<0,
         Weight               　   = 1<<1,///重し判定
         Decay                    = 1<<2,   //腐敗マス
+        Sticky = 1<<3,//カメレオンマス
     }
 
     //グリッドのライン描画

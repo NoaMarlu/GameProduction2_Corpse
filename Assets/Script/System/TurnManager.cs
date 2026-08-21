@@ -22,6 +22,7 @@ public class TurnManager : MonoBehaviour
     private List<Enemy> enemies = new List<Enemy>();
     private Player player;
     public GameObject arrowPrefab;
+    private bool playerStuck = false;
 
     //スイッチ
     private List<Switch> switches = new List<Switch>();
@@ -78,6 +79,7 @@ public class TurnManager : MonoBehaviour
     public void isPlayerInput(Vector2Int direction)
     {
         if ( turnState != TurnState.Wait) return;
+        if (playerStuck) return;
         if (!player.CanMove(direction)) return;
 
         turnState = TurnState.Action;
@@ -115,6 +117,7 @@ public class TurnManager : MonoBehaviour
         CheckClearBlock();
         CheckCoinCollect();
         CheckDecay();
+        CheckSticky();
         CheckClear();
         CheckClearDoor();
     }
@@ -191,7 +194,7 @@ public class TurnManager : MonoBehaviour
                 //矢の衝突処理を使いまわす
                 if (enemyCell != null && (enemyCell.type & GridManager.GridType.Decay) != 0) 
                 {
-                    enemy.HitArrow();
+                    enemy.HitArrow(Vector2Int.zero);
                     changed = true;
                 }
             }
@@ -235,7 +238,7 @@ public class TurnManager : MonoBehaviour
         foreach (var enemy in enemies.ToList())
         {
             var cell = GridManager.Instance.GetCell(enemy.gridX, enemy.gridY);
-            if (cell != null && !cell.isWalk) enemy.HitArrow();
+            if (cell != null && !cell.isWalk) enemy.HitArrow(Vector2Int.zero);
         }
     }
     //trunStateの変更
@@ -282,5 +285,11 @@ public class TurnManager : MonoBehaviour
     }
     //ロード画面の登録
     public void AddSceneLoader(SceneLoader loader) { if (!sceneLoaders.Contains(loader)) sceneLoaders.Add(loader); }
+    //カメレオン関連チェック
+    void CheckSticky()
+    {
+        var playerCell = GridManager.Instance.GetCell(player.gridX, player.gridY);
+        playerStuck = (playerCell != null && (playerCell.type & GridManager.GridType.Sticky) != 0);
+    }
 
 }

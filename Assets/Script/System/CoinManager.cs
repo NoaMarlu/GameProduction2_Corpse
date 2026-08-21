@@ -18,6 +18,7 @@ public class CoinManager : MonoBehaviour
             return;
         }
         Instance = this;
+        audioSource = GetComponent<AudioSource>();
     }
 
     //ƒRƒCƒ“æ“¾‚ÉŒÄ‚Ño‚µ

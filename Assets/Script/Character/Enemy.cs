@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
         None    =0,//遺体効果なし
         Weight  =1<<0,//重し効果
         Decay =1<<1,//周囲1マスを腐敗
+        Chameleon =1<<2,//舌を延ばす
     }
     public CorpseMode corpseMode;
 
@@ -44,6 +45,11 @@ public class Enemy : MonoBehaviour
     private List<GameObject> decayObjects = new List<GameObject>();
     private int corpseGridX;//遺体化した座標
     private int corpseGridY;
+
+    //カメレオン
+    public GameObject tonguePrefab;
+    private List<GameObject> tongueObjects = new List<GameObject>();
+    private Vector2Int lastHitDirection;
 
     //スプライト用
     private CharacterVisual visual;
@@ -97,8 +103,9 @@ public class Enemy : MonoBehaviour
     //位置変更
     void SnapToGrid(){  transform.position  =GridManager.Instance.GridToWorld(gridX, gridY); }
     //矢の衝突時に呼ぶ
-    public void HitArrow()
+    public void HitArrow(Vector2Int arrowDirection)
     {
+        lastHitDirection = arrowDirection;
         ChangeCorpse();
     }
 
@@ -140,6 +147,7 @@ public class Enemy : MonoBehaviour
     {
         if ((corpseMode & CorpseMode.Weight) != 0) ApplyWeight();
         if ((corpseMode & CorpseMode.Decay) != 0) ApplyDecay();
+        if ((corpseMode & CorpseMode.Chameleon) != 0) ApplyChameleonTongue();
     }
     //セルに重しを適用
     void ApplyWeight()
@@ -197,7 +205,49 @@ public class Enemy : MonoBehaviour
         decayObjects.Clear();
 
     }
+    void ApplyChameleonTongue()
+    {
+        if (lastHitDirection == Vector2Int.zero) return;
+        //飛んだ方向と反対に伸ばすようにする
+        Vector2Int tongueDir = new Vector2Int(-lastHitDirection.x, -lastHitDirection.y);
 
+        int currentX = gridX;
+        int currentY = gridY;
+        while (true)
+        {
+            int targetX = currentX + tongueDir.x;
+            int targetY = currentY + tongueDir.y;
+            var cell = GridManager.Instance.GetCell(targetX, targetY);
+
+            if (cell == null || !cell.isWalk) break;
+
+            //マスをStickyにする
+            cell.type |= GridManager.GridType.Sticky;
+            //オブジェクト生成
+            if(tonguePrefab != null)
+            {
+                Vector3 worldPos = GridManager.Instance.GridToWorld(targetX, targetY);
+                GameObject tongueObj = Instantiate(tonguePrefab,worldPos,Quaternion.identity);
+                tongueObjects.Add(tongueObj);
+            }
+            currentX = targetX; 
+            currentY = targetY;
+        }
+    }
+    void RemoveTongue()
+    {
+        if ((corpseMode & CorpseMode.Chameleon) == 0) return;
+
+        foreach(var obj in tongueObjects)
+        {
+            if (obj == null) return;
+            Vector2Int pos = GridManager.Instance.WorldToGrid(obj.transform.position);
+            var cell = GridManager.Instance.GetCell(pos.x, pos.y);
+            if (cell != null) cell.type &= ~GridManager.GridType.Sticky;
+            Destroy(obj);
+        }
+        tongueObjects.Clear();
+    }
 
     //ステージのアクティブ管理
     public void SetActive(bool active)
@@ -218,6 +268,7 @@ public class Enemy : MonoBehaviour
             if (corpseCell != null) corpseCell.arrowBlock = false ;
             if (corpseCell != null) corpseCell.type &= ~GridManager.GridType.Weight;
             RemoveDecay();
+            RemoveTongue();
         }
         isCorpse = false;
         //位置
@@ -260,6 +311,14 @@ public class Enemy : MonoBehaviour
     //移動先の計算のみ
     public Vector2Int DecideMove()
     {
+        //カメレオンマスのチェック
+        var myCell = GridManager.Instance.GetCell(gridX, gridY);
+        if(myCell != null && (myCell.type & GridManager.GridType.Sticky) != 0)
+        {
+            decideDirection = lastDirection;
+            return new Vector2Int(gridX, gridY);
+        }
+
         Vector2Int dir = lastDirection;
         int targetX = gridX + dir.x;
         int targetY = gridY + dir.y;

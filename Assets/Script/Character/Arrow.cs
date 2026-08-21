@@ -71,7 +71,7 @@ public class Arrow : MonoBehaviour
             if(hitEnemy != null)
             {
                 //í[Ç…çsÇ≠Ç‹Ç≈ë“ã@
-                hitEnemy.HitArrow();
+                hitEnemy.HitArrow(direction);
                 break;//ìGÇ…è’ìÀÇ≈í‚é~Ç∑ÇÈÇ®ÇÒ
             }
 
